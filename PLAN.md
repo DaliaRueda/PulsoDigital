@@ -393,13 +393,13 @@ Subir a YouTube como **"no listado"** y pegar el enlace en el PDF.
 
 ### 7.4 Criterios de aceptación
 
-- [ ] App Angular funcionando con las 7 vistas y routing
-- [ ] Uso demostrable de componentes, `@Input`/`@Output` y los 4 tipos de binding
-- [ ] Favoritos y CRUD funcionan igual que en la Entrega 2
-- [ ] Código comentado y organizado por carpetas (`models/`, `services/`, `components/`, `pages/`)
-- [ ] URL de despliegue pública y funcional
-- [ ] Video de ≤ 3 minutos publicado y enlazado
-- [ ] PDF APA con tabla de contenido, funcionamiento, tecnologías, URL, conclusiones y referencias
+- [x] App Angular funcionando con las 7 vistas y routing
+- [x] Uso demostrable de componentes, `@Input`/`@Output` y los 4 tipos de binding
+- [x] Favoritos y CRUD funcionan igual que en la Entrega 2
+- [x] Código comentado y organizado por carpetas (`models/`, `services/`, `components/`, `pages/`)
+- [x] URL de despliegue pública y funcional
+- [ ] Video de ≤ 3 minutos publicado y enlazado — guion listo en `docs/entrega-3/guion-video.md`
+- [x] PDF APA con tabla de contenido, funcionamiento, tecnologías, URL, conclusiones y referencias
 
 ---
 

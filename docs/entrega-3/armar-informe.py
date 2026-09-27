@@ -1,4 +1,59 @@
-# Informe — Entrega 3: Entrega final
+# -*- coding: utf-8 -*-
+"""Arma informe-apa.md de la Entrega 3 leyendo el codigo desde su origen.
+
+Igual que en la Entrega 2, los listados de codigo no se copian a mano: se leen
+de los archivos del proyecto cada vez que se ejecuta este script, de modo que
+el informe no pueda desincronizarse del repositorio.
+
+Uso:  python armar-informe.py
+"""
+import io
+import os
+
+RAIZ = os.path.join('..', '..')
+SALIDA = 'informe-apa.md'
+REPO = 'https://github.com/DaliaRueda/PulsoDigital'
+SITIO = 'https://daliarueda.github.io/PulsoDigital/'
+
+
+def leer(ruta):
+    return io.open(os.path.join(RAIZ, ruta), encoding='utf-8').read().rstrip()
+
+
+def listado(ruta, lenguaje, desde=None, hasta=None):
+    """Devuelve un bloque de codigo. Si se dan anclas, recorta entre ellas."""
+    texto = leer(ruta)
+    if desde:
+        texto = texto[texto.index(desde):]
+    if hasta:
+        texto = texto[:texto.index(hasta)].rstrip()
+    return '```' + lenguaje + '\n' + texto + '\n```'
+
+
+def codigo(ruta, lenguaje, **recorte):
+    """Bloque de codigo precedido por la nota de procedencia."""
+    lineas = leer(ruta).count('\n') + 1
+    trozo = recorte.get('desde') or recorte.get('hasta')
+    nota = ('Fragmento de `%s`.' % ruta) if trozo else (
+        'Archivo completo `%s` (%d líneas).' % (ruta, lineas))
+    return nota + '\n\n' + listado(ruta, lenguaje, **recorte)
+
+
+def figura(n, titulo, captura):
+    return '\n'.join([
+        '**Figura %d**' % n, '',
+        '*%s*' % titulo, '',
+        '> FIGURA: insertar `capturas/%s`' % captura, '',
+        '*Nota.* Elaboración propia.', '',
+    ])
+
+
+# ---------------------------------------------------------------- documento
+
+P = []
+A = P.append
+
+A("""# Informe — Entrega 3: Entrega final
 
 > **Cómo usar este borrador.** Se convierte a Word con:
 > `python ../hacer-docx.py informe-apa.md "Entrega-3-Entrega-Final-Pulso-Digital.docx" "Pulso Digital: aplicativo web de noticias desarrollado en Angular"`
@@ -85,11 +140,11 @@ incluida en el documento. La Tabla 1 recoge cada punto y el estado en que se ent
 
 El aplicativo está publicado y en funcionamiento en:
 
-**https://daliarueda.github.io/PulsoDigital/**
+**%(SITIO)s**
 
 El código fuente completo, con las tres entregas, está en el repositorio público:
 
-**https://github.com/DaliaRueda/PulsoDigital**
+**%(REPO)s**
 
 No hace falta instalar nada ni registrarse: basta abrir la dirección en cualquier navegador
 moderno. El aplicativo no tiene servidor propio ni base de datos, de modo que cada visitante
@@ -134,16 +189,11 @@ noticia se ve igual en cualquier parte del aplicativo. El corazón de cada tarje
 noticia de favoritos sin salir de la página, y el contador de la cabecera cambia en el mismo
 instante. La Figura 1 muestra la portada tal como se sirve en producción.
 
+""" % {'SITIO': SITIO, 'REPO': REPO})
 
-**Figura 1**
+A(figura(1, 'Portada del aplicativo desplegado', '01-inicio'))
 
-*Portada del aplicativo desplegado*
-
-> FIGURA: insertar `capturas/01-inicio`
-
-*Nota.* Elaboración propia.
-
-## 4.2 Listado de noticias
+A("""## 4.2 Listado de noticias
 
 El listado reúne las cuatro operaciones de consulta del catálogo, que funcionan combinadas entre
 sí: un campo de búsqueda que recorre título, resumen y autor; un filtro por categoría; un selector
@@ -153,16 +203,11 @@ página, para que el usuario no quede mirando una página que ya no existe. Cuan
 filtros no deja ninguna noticia, en lugar de una zona vacía aparece un aviso con un botón que
 limpia los filtros. La Figura 2 muestra la vista con los controles visibles.
 
+""")
 
-**Figura 2**
+A(figura(2, 'Listado con búsqueda, filtros, orden y paginación', '02-listado'))
 
-*Listado con búsqueda, filtros, orden y paginación*
-
-> FIGURA: insertar `capturas/02-listado`
-
-*Nota.* Elaboración propia.
-
-## 4.3 Detalle de la noticia
+A("""## 4.3 Detalle de la noticia
 
 El detalle recibe el identificador de la noticia en la propia dirección, lo que permite compartir
 el enlace de una nota concreta. Muestra la categoría, el titular, el autor, la fecha en formato
@@ -172,16 +217,11 @@ coincidencia de categoría y excluyendo la que se está leyendo. Si la direcció
 identificador que no existe, la vista lo dice con un aviso y ofrece volver al listado en lugar de
 quedarse en blanco. La Figura 3 recoge la vista.
 
+""")
 
-**Figura 3**
+A(figura(3, 'Detalle de una noticia con su crédito fotográfico y sus relacionadas', '03-detalle'))
 
-*Detalle de una noticia con su crédito fotográfico y sus relacionadas*
-
-> FIGURA: insertar `capturas/03-detalle`
-
-*Nota.* Elaboración propia.
-
-## 4.4 Mis favoritos
+A("""## 4.4 Mis favoritos
 
 Esta vista reúne las noticias que el usuario ha marcado con el corazón en cualquier otra pantalla.
 Permite quitarlas de una en una o vaciar la lista completa, y cuando no hay ninguna muestra un
@@ -190,16 +230,11 @@ favoritos sobreviven al cierre del navegador porque se guardan en su almacenamie
 se mantienen sincronizados si el usuario tiene dos pestañas abiertas del aplicativo. La Figura 4
 muestra la vista sin favoritos guardados, que es el estado en que la encuentra un visitante nuevo.
 
+""")
 
-**Figura 4**
+A(figura(4, 'Lista de favoritos en su estado vacío', '05-favoritos'))
 
-*Lista de favoritos en su estado vacío*
-
-> FIGURA: insertar `capturas/05-favoritos`
-
-*Nota.* Elaboración propia.
-
-## 4.5 Publicar y gestionar noticias
+A("""## 4.5 Publicar y gestionar noticias
 
 Esta es la vista con más lógica del aplicativo. El formulario de alta valida seis campos con reglas
 propias: longitud mínima del titular, categoría obligatoria, autor de al menos tres caracteres,
@@ -217,16 +252,11 @@ desde el navegador y lo que se registra es que están ocultas. De ahí que exist
 restaurar las noticias base, que las devuelve todas. La Figura 5 muestra el formulario, la vista
 previa y la tabla de gestión.
 
+""")
 
-**Figura 5**
+A(figura(5, 'Publicación de noticias con vista previa en vivo y tabla de gestión', '06-publicar'))
 
-*Publicación de noticias con vista previa en vivo y tabla de gestión*
-
-> FIGURA: insertar `capturas/06-publicar`
-
-*Nota.* Elaboración propia.
-
-## 4.6 Contacto
+A("""## 4.6 Contacto
 
 El formulario de contacto valida el nombre —solo letras, tildes y espacios—, el correo electrónico
 con una expresión regular, el asunto elegido de una lista, un mensaje de entre diez y quinientos
@@ -237,48 +267,33 @@ almacenamiento del navegador, y así se declara en el apartado 4.8: la confirmac
 el aplicativo hace realmente. La vista de detalle enlaza aquí con el asunto ya seleccionado cuando
 el lector quiere reportar un error en una nota concreta. La Figura 6 recoge el formulario.
 
+""")
 
-**Figura 6**
+A(figura(6, 'Formulario de contacto con sus validaciones', '04-contacto'))
 
-*Formulario de contacto con sus validaciones*
-
-> FIGURA: insertar `capturas/04-contacto`
-
-*Nota.* Elaboración propia.
-
-## 4.7 Acerca de y Créditos
+A("""## 4.7 Acerca de y Créditos
 
 La vista «Acerca de» reúne la línea editorial del medio, el equipo de redacción, un resumen de las
 tecnologías empleadas y un apartado de preguntas frecuentes plegable, donde solo una respuesta
 permanece abierta a la vez. Declara de forma explícita que se trata de un proyecto académico y que
 los nombres del equipo son ficticios. La Figura 7 la muestra.
 
+""")
 
-**Figura 7**
+A(figura(7, 'Vista informativa con línea editorial, tecnologías y preguntas frecuentes', '07-acerca'))
 
-*Vista informativa con línea editorial, tecnologías y preguntas frecuentes*
-
-> FIGURA: insertar `capturas/07-acerca`
-
-*Nota.* Elaboración propia.
-
-La vista de créditos cumple una obligación legal, no decorativa. Las dieciocho fotografías del
+A("""La vista de créditos cumple una obligación legal, no decorativa. Las dieciocho fotografías del
 aplicativo provienen de bancos de imágenes con licencia Creative Commons, y las licencias CC BY y
 CC BY-SA exigen atribuir al autor, nombrar la licencia y enlazar la fuente (Creative Commons,
 2026). El crédito viaja dentro de cada noticia en el archivo JSON, junto a la ruta de su imagen, de
 manera que no puede desincronizarse de la fotografía que acompaña; se muestra bajo la imagen en el
 detalle y se reúne completo en esta vista. La Figura 8 la recoge.
 
+""")
 
-**Figura 8**
+A(figura(8, 'Créditos de autoría y licencia de las dieciocho fotografías', '08-creditos'))
 
-*Créditos de autoría y licencia de las dieciocho fotografías*
-
-> FIGURA: insertar `capturas/08-creditos`
-
-*Nota.* Elaboración propia.
-
-## 4.8 Qué se guarda y dónde
+A("""## 4.8 Qué se guarda y dónde
 
 El aplicativo no tiene servidor ni base de datos. Las dieciocho noticias de partida se leen de un
 archivo JSON que se sirve junto al aplicativo, y todo lo que el usuario decide se guarda en el
@@ -442,54 +457,11 @@ sirve en la portada, en el listado, en las noticias relacionadas del detalle y e
 del formulario de publicación, donde el corazón no debe guardar nada porque la noticia todavía no
 existe.
 
+""")
 
-Archivo completo `angular/src/app/components/noticia-card/noticia-card.ts` (42 líneas).
+A(codigo('angular/src/app/components/noticia-card/noticia-card.ts', 'typescript'))
 
-```typescript
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Noticia } from '../../models/noticia';
-import { FechaEsPipe } from '../../pipes/fecha-es.pipe';
-
-/**
- * Tarjeta de noticia. Es el mismo componente en el inicio, en el listado y en
- * las noticias relacionadas del detalle.
- *
- * Reúne los cuatro tipos de enlace que pide la guía:
- *   - interpolación:      {{ noticia.titulo }}
- *   - property binding:   [src]="noticia.imagen"
- *   - event binding:      (click)="alternarFavorito()"
- *   - enlace de entrada y salida: @Input y @Output
- *
- * No toca el almacenamiento: avisa al componente que lo contiene y es este
- * quien decide qué hacer. Así la tarjeta sirve en cualquier contexto.
- */
-@Component({
-  selector: 'app-noticia-card',
-  imports: [RouterLink, FechaEsPipe],
-  templateUrl: './noticia-card.html',
-})
-export class NoticiaCardComponent {
-  /** Noticia que se muestra. */
-  @Input({ required: true }) noticia!: Noticia;
-
-  /** Si está guardada en favoritos. Lo decide quien usa la tarjeta. */
-  @Input() favorito = false;
-
-  /** Se emite con el identificador cuando se pulsa el corazón. */
-  @Output() alternar = new EventEmitter<string>();
-
-  alternarFavorito(): void {
-    this.alternar.emit(this.noticia.id);
-  }
-
-  /** Sustituye por un marcador la imagen cuya ruta no exista. */
-  imagenRota(evento: Event): void {
-    (evento.target as HTMLImageElement).style.display = 'none';
-  }
-}
-```
-## 6.3 Servicios
+A("""## 6.3 Servicios
 
 Hay dos servicios, y la razón de que sean dos es la naturaleza de lo que gestionan. El servicio de
 noticias lee datos que no cambian: pide el archivo JSON una vez y ofrece las operaciones de filtro,
@@ -502,93 +474,24 @@ lista de identificadores es una señal, y el recuento se declara como un valor d
 cabecera muestra ese recuento y se actualiza sola cuando cualquier vista guarda o quita una
 noticia, sin que ninguna vista tenga que avisarla.
 
+""")
 
-Fragmento de `angular/src/app/services/favoritos.service.ts`.
+A(codigo('angular/src/app/services/favoritos.service.ts', 'typescript',
+         desde='  /** Identificadores guardados.',
+         hasta='  /* ------'))
 
-```typescript
-  /** Identificadores guardados. Es la fuente de la que derivan las demás. */
-  private readonly ids = signal<string[]>(this.leer(FavoritosService.CLAVES.favoritos, []));
-
-  /** Cuántas noticias hay guardadas. La cabecera se suscribe a esto. */
-  readonly cuantos = computed(() => this.ids().length);
-
-  /** Lista de identificadores, de solo lectura para quien la consulte. */
-  readonly favoritos = this.ids.asReadonly();
-
-  constructor() {
-    // Dos pestañas abiertas se mantienen sincronizadas.
-    window.addEventListener('storage', (e) => {
-      if (e.key === FavoritosService.CLAVES.favoritos) {
-        this.ids.set(this.leer(FavoritosService.CLAVES.favoritos, []));
-      }
-    });
-  }
-```
-## 6.4 Enrutador y carga diferida
+A("""## 6.4 Enrutador y carga diferida
 
 Las ocho vistas se declaran en un único archivo de rutas. Cada una usa `loadComponent`, que retrasa
 la descarga de su código hasta que el usuario abre esa dirección; el compilador produce por ello un
 fragmento independiente por vista. La ruta del detalle declara el identificador como parámetro, y la
 última regla captura cualquier dirección desconocida y devuelve al inicio.
 
+""")
 
-Archivo completo `angular/src/app/app.routes.ts` (52 líneas).
+A(codigo('angular/src/app/app.routes.ts', 'typescript'))
 
-```typescript
-import { Routes } from '@angular/router';
-
-/**
- * Rutas de la aplicación. Cada vista se carga de forma diferida, de modo que
- * el usuario solo descarga el código de la pantalla que abre.
- *
- * El detalle recibe el identificador como parámetro: /noticias/n-001
- */
-export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./pages/inicio/inicio').then((m) => m.InicioComponent),
-    title: 'Pulso Digital — Noticias de tecnología e innovación',
-  },
-  {
-    path: 'noticias',
-    loadComponent: () => import('./pages/listado/listado').then((m) => m.ListadoComponent),
-    title: 'Noticias — Pulso Digital',
-  },
-  {
-    path: 'noticias/:id',
-    loadComponent: () => import('./pages/detalle/detalle').then((m) => m.DetalleComponent),
-    title: 'Noticia — Pulso Digital',
-  },
-  {
-    path: 'favoritos',
-    loadComponent: () => import('./pages/favoritos/favoritos').then((m) => m.FavoritosComponent),
-    title: 'Mis favoritos — Pulso Digital',
-  },
-  {
-    path: 'publicar',
-    loadComponent: () => import('./pages/publicar/publicar').then((m) => m.PublicarComponent),
-    title: 'Publicar y gestionar noticias — Pulso Digital',
-  },
-  {
-    path: 'contacto',
-    loadComponent: () => import('./pages/contacto/contacto').then((m) => m.ContactoComponent),
-    title: 'Contacto — Pulso Digital',
-  },
-  {
-    path: 'acerca',
-    loadComponent: () => import('./pages/acerca/acerca').then((m) => m.AcercaComponent),
-    title: 'Acerca de — Pulso Digital',
-  },
-  {
-    path: 'creditos',
-    loadComponent: () => import('./pages/creditos/creditos').then((m) => m.CreditosComponent),
-    title: 'Créditos de imágenes — Pulso Digital',
-  },
-  // Cualquier dirección desconocida vuelve al inicio.
-  { path: '**', redirectTo: '' },
-];
-```
-## 6.5 Los cuatro tipos de enlace de datos
+A("""## 6.5 Los cuatro tipos de enlace de datos
 
 La guía del módulo pide evidenciar los cuatro mecanismos con que Angular conecta la lógica de un
 componente con su plantilla. La Tabla 6 los enumera con un ejemplo real del código del aplicativo.
@@ -619,21 +522,13 @@ búsqueda, categoría, orden y página— son señales, y el resultado que se mu
 declara como un cálculo que depende de ellas. Cambiar cualquier control recalcula solo lo que
 depende de él.
 
+""")
 
-Fragmento de `angular/src/app/pages/listado/listado.ts`.
+A(codigo('angular/src/app/pages/listado/listado.ts', 'typescript',
+         desde='  readonly resultado = computed(',
+         hasta='  readonly paginas = computed('))
 
-```typescript
-  readonly resultado = computed(() =>
-    this.noticiasSrv.ordenar(
-      this.noticiasSrv.filtrar(this.catalogo(), this.texto(), this.categoria()),
-      this.orden(),
-    ),
-  );
-
-  readonly totalPaginas = computed(() => this.noticiasSrv.totalPaginas(this.resultado().length));
-  readonly visibles = computed(() => this.noticiasSrv.paginar(this.resultado(), this.pagina()));
-```
-Esta es la diferencia práctica más grande respecto de la entrega anterior. En el prototipo en
+A("""Esta es la diferencia práctica más grande respecto de la entrega anterior. En el prototipo en
 JavaScript, la misma funcionalidad exigía una función que leyera los cuatro controles, calculara el
 resultado y volviera a dibujar la lista, y había que acordarse de llamarla desde cada uno de los
 cuatro sitios donde algo cambiaba.
@@ -647,47 +542,11 @@ motivo concreto que se documenta en el propio código: convertir la cadena con `
 interpreta como hora universal, y en Colombia, cinco horas por detrás, eso devuelve el día anterior.
 El *pipe* parte la cadena en lugar de interpretarla como instante de tiempo.
 
+""")
 
-Archivo completo `angular/src/app/pipes/fecha-es.pipe.ts` (35 líneas).
+A(codigo('angular/src/app/pipes/fecha-es.pipe.ts', 'typescript'))
 
-```typescript
-import { Pipe, PipeTransform } from '@angular/core';
-
-const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-
-const MESES_CORTOS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun',
-  'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-
-/**
- * Da formato a una fecha ISO (AAAA-MM-DD) en español.
- *
- * Se parte la cadena en lugar de usar «new Date()»: ese constructor la
- * interpreta como UTC y en Colombia, que va cinco horas por detrás,
- * devolvería el día anterior.
- *
- * Formatos:
- *   'tarjeta' → 12 sep
- *   'corto'   → 12 sep 2026        (por omisión)
- *   'largo'   → 12 de septiembre de 2026
- */
-@Pipe({ name: 'fechaEs' })
-export class FechaEsPipe implements PipeTransform {
-  transform(iso: string | undefined, formato: 'tarjeta' | 'corto' | 'largo' = 'corto'): string {
-    const p = String(iso ?? '').split('-');
-    if (p.length !== 3) return '';
-
-    const dia = parseInt(p[2], 10);
-    const mes = parseInt(p[1], 10) - 1;
-    if (isNaN(dia) || isNaN(mes) || mes < 0 || mes > 11) return '';
-
-    if (formato === 'largo') return `${dia} de ${MESES[mes]} de ${p[0]}`;
-    if (formato === 'tarjeta') return `${dia} ${MESES_CORTOS[mes]}`;
-    return `${dia} ${MESES_CORTOS[mes]} ${p[0]}`;
-  }
-}
-```
-## 6.8 Accesibilidad
+A("""## 6.8 Accesibilidad
 
 Las pautas de accesibilidad para el contenido web (World Wide Web Consortium, 2023) se aplicaron en
 las decisiones que dependen del marcado, no como una revisión final. El documento declara su idioma,
@@ -791,69 +650,11 @@ dependencias exactas declaradas en el archivo de bloqueo, compila el aplicativo 
 resultado. La consecuencia práctica es que la dirección publicada siempre refleja lo que hay en el
 repositorio, y que nadie puede desplegar una versión que no esté versionada.
 
+""")
 
-Fragmento de `.github/workflows/deploy.yml`.
+A(codigo('.github/workflows/deploy.yml', 'yaml', desde='name: Desplegar'))
 
-```yaml
-name: Desplegar en GitHub Pages
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Un despliegue a la vez; si llegan varios, se atiende el último.
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
-jobs:
-  compilar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Descargar el repositorio
-        uses: actions/checkout@v4
-
-      - name: Preparar Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: angular/package-lock.json
-
-      - name: Instalar dependencias
-        working-directory: angular
-        run: npm ci
-
-      - name: Compilar para GitHub Pages
-        working-directory: angular
-        run: npm run build:pages
-
-      - name: Preparar Pages
-        uses: actions/configure-pages@v5
-
-      - name: Subir la compilación
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: angular/dist/pulso-digital/browser
-
-  desplegar:
-    needs: compilar
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.despliegue.outputs.page_url }}
-    steps:
-      - name: Publicar
-        id: despliegue
-        uses: actions/deploy-pages@v4
-```
-El comando de compilación merece una nota. El aplicativo no se sirve en la raíz de un dominio, sino
+A("""El comando de compilación merece una nota. El aplicativo no se sirve en la raíz de un dominio, sino
 en una subcarpeta con el nombre del repositorio, así que la compilación se lanza indicando esa base:
 
 ```
@@ -883,37 +684,11 @@ qué mostrar. Un pequeño archivo de Node.js lo hace al terminar cada compilaci�
 escribir el archivo `.nojekyll`, sin el cual GitHub descartaría las carpetas que empiezan por guion
 bajo.
 
+""")
 
-Archivo completo `angular/scripts/post-build.mjs` (25 líneas).
+A(codigo('angular/scripts/post-build.mjs', 'javascript'))
 
-```javascript
-/**
- * Ajustes posteriores a la compilación, necesarios para GitHub Pages.
- *
- * 1. 404.html: GitHub Pages no reenvía a index.html las rutas que no existen
- *    como archivo. Al servir una copia de index.html como página de error, el
- *    enrutador de Angular recibe el control y muestra la vista correcta. Sin
- *    esto, abrir /noticias directamente daría un 404.
- *
- * 2. .nojekyll: evita que GitHub procese la salida con Jekyll, que ignoraría
- *    los archivos y carpetas que empiezan por guion bajo.
- */
-import { copyFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
-
-const DIST = join(process.cwd(), 'dist', 'pulso-digital', 'browser');
-
-if (!existsSync(join(DIST, 'index.html'))) {
-  console.error('No se encontró index.html en ' + DIST);
-  process.exit(1);
-}
-
-copyFileSync(join(DIST, 'index.html'), join(DIST, '404.html'));
-writeFileSync(join(DIST, '.nojekyll'), '');
-
-console.log('post-build: 404.html y .nojekyll escritos en dist/pulso-digital/browser');
-```
-Cabe precisar que esta solución es la habitual, no un apaño: el servidor sigue respondiendo con el
+A("""Cabe precisar que esta solución es la habitual, no un apaño: el servidor sigue respondiendo con el
 código 404 en la cabecera de la respuesta, pero entrega el aplicativo completo y el usuario ve la
 vista correcta. Eliminar ese código de estado exigiría un servidor propio, que es precisamente lo
 que un sitio estático no tiene.
@@ -948,7 +723,7 @@ desarrollo. La Tabla 9 recoge el resultado.
 
 ## 9.1 Repositorio
 
-**https://github.com/DaliaRueda/PulsoDigital**
+**%(REPO)s**
 
 El repositorio es público y contiene las tres entregas. La carpeta `src/` guarda el prototipo en
 JavaScript de la Entrega 2; `angular/` contiene el aplicativo de esta entrega; `docs/` reúne la
@@ -1033,3 +808,13 @@ ReactiveX. (2026). *RxJS documentation*. https://rxjs.dev/
 
 World Wide Web Consortium. (2023). *Web Content Accessibility Guidelines (WCAG) 2.2*.
 https://www.w3.org/TR/WCAG22/
+""" % {'REPO': REPO})
+
+# ------------------------------------------------------------------ escritura
+
+texto = '\n'.join(P)
+io.open(SALIDA, 'w', encoding='utf-8', newline='\n').write(texto)
+
+palabras = len(texto.split())
+print('%s escrito: %d palabras, %d figuras, %d tablas'
+      % (SALIDA, palabras, texto.count('**Figura '), texto.count('**Tabla ')))

@@ -25,14 +25,18 @@ Proyecto del módulo **Desarrollo de Front-end** — Agosto 2026.
   - `capturar-app.py` — captura las pantallas del aplicativo en funcionamiento
   - `creditos-imagenes.md` — autoría y licencia de las 18 fotografías
 - [docs/entrega-3/](docs/entrega-3/) — entrega final
+  - `Entrega-3-Entrega-Final-Pulso-Digital.docx` — **documento de entrega** (APA 7, 40 páginas)
+  - `armar-informe.py` — arma el informe incrustando el código desde su origen
+  - `capturar-app.py` — captura las pantallas del sitio ya desplegado
+  - `guion-video.md` — guion cronometrado del vídeo de presentación
 
 ## Estado
 
 | Entrega | Semana | Estado |
 |---|---|---|
-| 1 — Maquetación | 3 | En curso |
-| 2 — Prototipo funcional | 5 | Entregable listo |
-| 3 — Entrega final (Angular + despliegue) | 7 | Pendiente |
+| 1 — Maquetación | 3 | Entregada |
+| 2 — Prototipo funcional | 5 | Entregada |
+| 3 — Entrega final (Angular + despliegue) | 7 | Entregable listo; falta grabar el vídeo |
 
 ## Tecnologías
 
