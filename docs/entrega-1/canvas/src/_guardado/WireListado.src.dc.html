@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+/*@FONTS-WIRE@*/
+/*@WIRE@*/
+.common{border:2px dashed var(--w-line);border-radius:8px;height:66px;
+  display:flex;align-items:center;justify-content:center;color:var(--w-soft);font-size:17px;}
+  </style>
+</helmet>
+
+<div style="background:var(--w-paper);padding:34px 0 46px">
+  <div class="wrapw">
+
+    <div class="wtape">
+      <span class="wtitle">Listado de noticias</span>
+      <span class="fase">Fase 1 · Wireframe · 1440 px</span>
+    </div>
+
+    <div class="hand tilt alt" style="padding:22px;display:flex;flex-direction:column;gap:18px">
+
+      <div class="common">Cabecera, buscador, contador y menú — definidos en el wireframe de Inicio</div>
+
+      <!-- Encabezado de sección -->
+      <div class="rel">
+        <span class="pin float" style="top:-8px;left:-36px">1</span>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;padding:6px 4px 0">
+          <span class="wbig">Todas las noticias</span>
+          <span class="wlabel">Mostrando N de 42</span>
+        </div>
+      </div>
+
+      <!-- Búsqueda y orden -->
+      <div class="rel" style="display:flex;gap:14px">
+        <span class="pin float">2</span>
+        <div class="wfield" style="flex-grow:1;height:52px">Buscar por título o contenido…</div>
+        <div class="wfield" style="width:250px;height:52px;justify-content:space-between">Ordenar<span>▾</span></div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="rel" style="display:flex;flex-wrap:wrap;gap:10px">
+        <span class="pin float" style="top:-16px;left:-36px">3</span>
+        <span class="wchip on">Todas</span>
+        <span class="wchip">Categoría A</span>
+        <span class="wchip">Categoría B</span>
+        <span class="wchip">Categoría C</span>
+        <span class="wchip">Categoría D</span>
+        <span class="wchip">Categoría E</span>
+        <span class="wchip">Categoría F</span>
+      </div>
+
+      <!-- Grilla -->
+      <div class="rel">
+        <span class="pin float">4</span>
+        <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:18px">
+          <div class="hand" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+            <div class="wimg" style="height:100px"><span>img</span></div>
+            <span class="wlabel">categoría</span>
+            <span style="font-size:19px">Titular</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w60"></div></div>
+            <div style="display:flex;justify-content:space-between;border-top:1.5px dashed var(--w-line);padding-top:9px">
+              <span class="wlabel">fecha</span><span class="wlabel">♡ · Ver más</span>
+            </div>
+          </div>
+          <div class="hand alt" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+            <div class="wimg" style="height:100px"><span>img</span></div>
+            <span class="wlabel">categoría</span>
+            <span style="font-size:19px">Titular</span>
+            <div class="wlines"><div class="wline w80"></div><div class="wline w70"></div></div>
+            <div style="display:flex;justify-content:space-between;border-top:1.5px dashed var(--w-line);padding-top:9px">
+              <span class="wlabel">fecha</span><span class="wlabel">♥ · Ver más</span>
+            </div>
+          </div>
+          <div class="hand" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+            <div class="wimg" style="height:100px"><span>img</span></div>
+            <span class="wlabel">categoría</span>
+            <span style="font-size:19px">Titular</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w45"></div></div>
+            <div style="display:flex;justify-content:space-between;border-top:1.5px dashed var(--w-line);padding-top:9px">
+              <span class="wlabel">fecha</span><span class="wlabel">♡ · Ver más</span>
+            </div>
+          </div>
+          <div class="hand alt" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+            <div class="wimg" style="height:100px"><span>img</span></div>
+            <span class="wlabel">categoría</span>
+            <span style="font-size:19px">Titular</span>
+            <div class="wlines"><div class="wline w80"></div><div class="wline w60"></div></div>
+            <div style="display:flex;justify-content:space-between;border-top:1.5px dashed var(--w-line);padding-top:9px">
+              <span class="wlabel">fecha</span><span class="wlabel">♡ · Ver más</span>
+            </div>
+          </div>
+          <div class="hand" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+            <div class="wimg" style="height:100px"><span>img</span></div>
+            <span class="wlabel">categoría</span>
+            <span style="font-size:19px">Titular</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w70"></div></div>
+            <div style="display:flex;justify-content:space-between;border-top:1.5px dashed var(--w-line);padding-top:9px">
+              <span class="wlabel">fecha</span><span class="wlabel">♥ · Ver más</span>
+            </div>
+          </div>
+          <div class="hand alt" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+            <div class="wimg" style="height:100px"><span>img</span></div>
+            <span class="wlabel">categoría</span>
+            <span style="font-size:19px">Titular</span>
+            <div class="wlines"><div class="wline w80"></div><div class="wline w45"></div></div>
+            <div style="display:flex;justify-content:space-between;border-top:1.5px dashed var(--w-line);padding-top:9px">
+              <span class="wlabel">fecha</span><span class="wlabel">♡ · Ver más</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paginación -->
+      <div style="display:flex;justify-content:center;padding-top:6px">
+       <div class="rel" style="display:flex;gap:9px">
+        <span class="pin float" style="top:-10px;left:-40px">5</span>
+        <span class="wbtn" style="height:38px;padding:0 16px;font-size:15px">← Anterior</span>
+        <span class="wbtn solid" style="height:38px;width:38px;padding:0;font-size:15px">1</span>
+        <span class="wbtn" style="height:38px;width:38px;padding:0;font-size:15px">2</span>
+        <span class="wbtn" style="height:38px;width:38px;padding:0;font-size:15px">3</span>
+        <span class="wbtn" style="height:38px;padding:0 16px;font-size:15px">Siguiente →</span>
+       </div>
+      </div>
+
+      <!-- Estado vacío -->
+      <div class="rel">
+        <span class="pin float">6</span>
+        <div class="hand fill" style="padding:30px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+          <span class="wlabel">Variante · sin resultados</span>
+          <span class="wtitle">No encontramos noticias con esos filtros</span>
+          <div class="wline w45" style="width:340px"></div>
+          <span class="wbtn" style="margin-top:6px">Limpiar filtros</span>
+        </div>
+      </div>
+
+      <div class="common">Pie de página común</div>
+
+    </div>
+
+    <div style="padding-top:30px;display:flex;gap:40px;align-items:flex-start">
+      <span class="wtitle" style="width:180px;flex-shrink:0">Decisiones<br>de esta vista</span>
+      <ul class="legend" style="flex-grow:1;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px 40px">
+        <li><span class="pin">1</span><span>El contador de resultados va junto al título y refleja los filtros activos, no el total del archivo: es la única confirmación de que el filtro hizo algo.</span></li>
+        <li><span class="pin">2</span><span>Búsqueda y orden comparten fila y se sitúan por encima de los filtros, porque escribir es la acción más frecuente y debe encontrarse sin buscarla.</span></li>
+        <li><span class="pin">3</span><span>Filtros como chips de una sola selección, no como desplegable: las siete categorías caben en una línea y así el usuario ve el mapa completo del archivo.</span></li>
+        <li><span class="pin">4</span><span>La tarjeta es exactamente la misma del Inicio. Reutilizarla ahorra un componente en el desarrollo y hace previsible la interfaz.</span></li>
+        <li><span class="pin">5</span><span>Paginación numérica en lugar de scroll infinito: permite citar «página 3» en el informe y es más simple de implementar sin framework.</span></li>
+        <li><span class="pin">6</span><span>El estado vacío se diseña desde el principio. Sin él, una búsqueda sin resultados deja la página en blanco y parece un error de programación.</span></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

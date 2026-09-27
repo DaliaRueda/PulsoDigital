@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+/*@FONTS-WIRE@*/
+/*@WIRE@*/
+.common{border:2px dashed var(--w-line);border-radius:8px;height:66px;
+  display:flex;align-items:center;justify-content:center;color:var(--w-soft);font-size:17px;}
+.err{border-color:var(--w-ink);border-width:3px;}
+  </style>
+</helmet>
+
+<div style="background:var(--w-paper);padding:34px 0 46px">
+  <div class="wrapw">
+
+    <div class="wtape">
+      <span class="wtitle">Contacto</span>
+      <span class="fase">Fase 1 · Wireframe · 1440 px</span>
+    </div>
+
+    <div class="hand tilt alt" style="padding:22px;display:flex;flex-direction:column;gap:18px">
+
+      <div class="common">Cabecera, buscador, contador y menú — definidos en el wireframe de Inicio</div>
+
+      <div style="padding:6px 4px 0;display:flex;flex-direction:column;gap:10px">
+        <span class="wbig">Escríbele a la redacción</span>
+        <div class="wlines"><div class="wline w45" style="width:460px"></div></div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:flex-start">
+
+        <!-- Formulario -->
+        <div class="rel" style="width:60%;flex-shrink:0">
+          <span class="pin float">1</span>
+          <div class="hand" style="padding:22px;display:flex;flex-direction:column;gap:18px">
+            <span class="wtitle">Formulario de contacto</span>
+
+            <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:18px">
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <span class="wlabel">Nombre *</span>
+                <div class="wfield">texto escrito</div>
+                <span class="wlabel" style="font-size:14px">regla: mín. 3 caracteres</span>
+              </div>
+              <div class="rel" style="display:flex;flex-direction:column;gap:7px">
+                <span class="pin float" style="top:-12px;left:auto;right:-12px">2</span>
+                <span class="wlabel">Correo *</span>
+                <div class="wfield err">correo incompleto ✕</div>
+                <span class="wlabel" style="font-size:14px">mensaje de error bajo el campo</span>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <span class="wlabel">Asunto *</span>
+              <div class="wfield" style="justify-content:space-between">opción seleccionada<span>▾</span></div>
+            </div>
+
+            <div class="rel" style="display:flex;flex-direction:column;gap:7px">
+              <span class="pin float" style="top:-10px;left:-36px">3</span>
+              <span class="wlabel">Mensaje *</span>
+              <div class="wfield err" style="height:120px;align-items:flex-start;padding-top:12px">vacío ✕</div>
+              <div style="display:flex;justify-content:space-between">
+                <span class="wlabel" style="font-size:14px">obligatorio, mín. 10</span>
+                <span class="wlabel" style="font-size:14px">0 / 500</span>
+              </div>
+            </div>
+
+            <div class="rel" style="display:flex;gap:11px;align-items:center">
+              <span class="pin float" style="top:-4px;left:-36px">4</span>
+              <span style="width:22px;height:22px;border:2px solid var(--w-ink);flex-shrink:0"></span>
+              <span style="font-size:16px">Autorizo el tratamiento de mis datos *</span>
+            </div>
+
+            <div style="display:flex;gap:12px;border-top:2px dashed var(--w-line);padding-top:18px">
+              <span class="wbtn solid">Enviar mensaje</span>
+              <span class="wbtn">Limpiar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel lateral -->
+        <div class="rel" style="flex-grow:1;display:flex;flex-direction:column;gap:16px">
+          <span class="pin float">5</span>
+          <div class="hand alt fill" style="padding:20px;display:flex;flex-direction:column;gap:14px">
+            <span class="wlabel">Datos de contacto</span>
+            <div class="wlines" style="gap:14px">
+              <div class="wline w90"></div><div class="wline w70"></div>
+              <div class="wline w80"></div><div class="wline w60"></div>
+            </div>
+          </div>
+          <div class="wimg" style="height:170px"><span>Mapa de referencia</span></div>
+        </div>
+
+      </div>
+
+      <!-- Confirmación -->
+      <div class="rel">
+        <span class="pin float">6</span>
+        <div class="hand fill" style="padding:24px;display:flex;flex-direction:column;gap:12px">
+          <span class="wlabel">Variante · envío correcto</span>
+          <div class="hand" style="border-left:5px solid var(--w-ink);padding:16px 18px;display:flex;flex-direction:column;gap:9px">
+            <span class="wtitle">¡Mensaje enviado!</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w60"></div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding-top:4px">
+            <span class="wbtn" style="height:38px;font-size:15px">Volver al inicio</span>
+            <span class="wbtn" style="height:38px;font-size:15px">Enviar otro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="common">Pie de página común</div>
+
+    </div>
+
+    <div style="padding-top:30px;display:flex;gap:40px;align-items:flex-start">
+      <span class="wtitle" style="width:180px;flex-shrink:0">Decisiones<br>de esta vista</span>
+      <ul class="legend" style="flex-grow:1;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px 40px">
+        <li><span class="pin">1</span><span>El formulario ocupa la columna ancha y los datos de contacto la estrecha: se asume que quien entra viene a escribir, no a copiar un teléfono.</span></li>
+        <li><span class="pin">2</span><span>Nombre y correo comparten fila porque son cortos; el resto ocupa el ancho completo. Evita un formulario de seis filas que parece más largo de lo que es.</span></li>
+        <li><span class="pin">3</span><span>El contador de caracteres se diseña desde el wireframe: es la forma de comunicar el límite de 500 sin escribirlo en un párrafo de ayuda.</span></li>
+        <li><span class="pin">4</span><span>La casilla de autorización es un campo obligatorio más y se valida igual que los otros, con su propio mensaje de error.</span></li>
+        <li><span class="pin">5</span><span>Se maquetan los estados de error, no solo el formulario en reposo. Es la mitad de la característica 5 y la que más se olvida en el desarrollo.</span></li>
+        <li><span class="pin">6</span><span>La confirmación reemplaza al formulario en el mismo lugar de la página, sin abrir una ventana ni cambiar de pantalla.</span></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

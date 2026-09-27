@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+/*@FONTS-WIRE@*/
+/*@WIRE@*/
+  </style>
+</helmet>
+
+<div style="background:var(--w-paper);padding:34px 0 46px">
+  <div class="wrapw">
+
+    <div class="wtape">
+      <span class="wtitle">Inicio (Home)</span>
+      <span class="fase">Fase 1 · Wireframe · 1440 px</span>
+    </div>
+
+    <!-- ===== Boceto ===== -->
+    <div class="hand tilt" style="padding:22px;display:flex;flex-direction:column;gap:18px">
+
+      <!-- Cabecera -->
+      <div class="rel">
+        <span class="pin float">1</span>
+        <div class="hand alt fill" style="height:76px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+          <span class="wbig" style="font-size:26px">Logo + nombre</span>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div class="wfield" style="width:230px;height:40px;font-size:15px">Buscar…</div>
+            <div class="wbtn" style="height:40px;font-size:15px">♡ Favoritos (n)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegación -->
+      <div class="rel">
+        <span class="pin float">2</span>
+        <div class="hand" style="height:62px;padding:0 18px;display:flex;align-items:center;gap:16px">
+          <span class="wchip on">Inicio</span>
+          <span class="wchip">Noticias</span>
+          <span class="wchip">Favoritos</span>
+          <span class="wchip">Publicar</span>
+          <span class="wchip">Contacto</span>
+          <span class="wchip">Acerca de</span>
+        </div>
+      </div>
+
+      <!-- Bienvenida + noticia de portada -->
+      <div class="rel" style="display:flex;gap:20px;align-items:stretch">
+        <span class="pin float">3</span>
+        <div class="hand alt" style="width:44%;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:16px">
+          <span class="wlabel">Sección de bienvenida</span>
+          <span class="wbig">Titular grande<br>de la portada</span>
+          <div class="wlines" style="padding-top:4px">
+            <div class="wline w90"></div>
+            <div class="wline w80"></div>
+            <div class="wline w45"></div>
+          </div>
+          <div style="display:flex;gap:12px;padding-top:10px">
+            <span class="wbtn solid">Explorar noticias</span>
+            <span class="wbtn">Contactar</span>
+          </div>
+        </div>
+        <div class="hand" style="flex-grow:1;padding:18px;display:flex;flex-direction:column;gap:12px">
+          <span class="wlabel">Noticia de portada</span>
+          <div class="wimg" style="height:186px"><span>Imagen 16:9</span></div>
+          <span style="font-size:22px">Titular de la noticia destacada</span>
+          <div class="wlines"><div class="wline w90"></div><div class="wline w60"></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:4px">
+            <span class="wlabel">autor · fecha · lectura</span>
+            <span class="wlabel">Ver más →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Destacadas -->
+      <div class="rel">
+        <span class="pin float">4</span>
+        <div class="hand" style="padding:20px;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between">
+            <span class="wtitle">Noticias destacadas</span>
+            <span class="wlabel">Ver todas →</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:18px">
+            <div class="hand alt" style="padding:14px;display:flex;flex-direction:column;gap:10px">
+              <div class="wimg" style="height:108px"><span>img</span></div>
+              <span class="wlabel">categoría</span>
+              <span style="font-size:19px">Titular de la tarjeta</span>
+              <div class="wlines"><div class="wline w90"></div><div class="wline w70"></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;border-top:1.5px dashed var(--w-line);padding-top:10px">
+                <span class="wlabel">fecha · min</span><span class="wlabel">♡ · Ver más</span>
+              </div>
+            </div>
+            <div class="hand" style="padding:14px;display:flex;flex-direction:column;gap:10px">
+              <div class="wimg" style="height:108px"><span>img</span></div>
+              <span class="wlabel">categoría</span>
+              <span style="font-size:19px">Titular de la tarjeta</span>
+              <div class="wlines"><div class="wline w80"></div><div class="wline w60"></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;border-top:1.5px dashed var(--w-line);padding-top:10px">
+                <span class="wlabel">fecha · min</span><span class="wlabel">♡ · Ver más</span>
+              </div>
+            </div>
+            <div class="hand alt" style="padding:14px;display:flex;flex-direction:column;gap:10px">
+              <div class="wimg" style="height:108px"><span>img</span></div>
+              <span class="wlabel">categoría</span>
+              <span style="font-size:19px">Titular de la tarjeta</span>
+              <div class="wlines"><div class="wline w90"></div><div class="wline w45"></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;border-top:1.5px dashed var(--w-line);padding-top:10px">
+                <span class="wlabel">fecha · min</span><span class="wlabel">♡ · Ver más</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Llamado a la acción -->
+      <div class="rel">
+        <span class="pin float">5</span>
+        <div class="hand alt fill" style="height:120px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:28px">
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <span class="wtitle">Franja de llamado a la acción</span>
+            <div class="wline w80" style="width:420px"></div>
+          </div>
+          <div style="display:flex;gap:12px">
+            <span class="wbtn solid">Mis favoritos</span>
+            <span class="wbtn">Explorar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección informativa -->
+      <div class="hand" style="padding:20px;display:flex;flex-direction:column;gap:16px">
+        <span class="wtitle">Sección informativa</span>
+        <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:18px">
+          <div class="hand alt" style="padding:16px;display:flex;flex-direction:column;gap:10px">
+            <div class="wimg" style="width:40px;height:40px"></div>
+            <span style="font-size:19px">Título</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w70"></div></div>
+          </div>
+          <div class="hand" style="padding:16px;display:flex;flex-direction:column;gap:10px">
+            <div class="wimg" style="width:40px;height:40px"></div>
+            <span style="font-size:19px">Título</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w60"></div></div>
+          </div>
+          <div class="hand alt" style="padding:16px;display:flex;flex-direction:column;gap:10px">
+            <div class="wimg" style="width:40px;height:40px"></div>
+            <span style="font-size:19px">Título</span>
+            <div class="wlines"><div class="wline w80"></div><div class="wline w70"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="rel">
+        <span class="pin float">6</span>
+        <div class="hand fill" style="padding:20px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:26px">
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <span style="font-size:20px">Logo + descripción</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w70"></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <span class="wlabel">Secciones</span>
+            <div class="wlines"><div class="wline w80"></div><div class="wline w60"></div><div class="wline w70"></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <span class="wlabel">Categorías</span>
+            <div class="wlines"><div class="wline w70"></div><div class="wline w80"></div><div class="wline w45"></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <span class="wlabel">Contacto</span>
+            <div class="wlines"><div class="wline w90"></div><div class="wline w60"></div><div class="wline w80"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== Leyenda de las llamadas ===== -->
+    <div style="padding-top:30px;display:flex;gap:40px;align-items:flex-start">
+      <span class="wtitle" style="width:180px;flex-shrink:0">Decisiones<br>de esta vista</span>
+      <ul class="legend" style="flex-grow:1;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px 40px">
+        <li><span class="pin">1</span><span>El contador de favoritos vive en la cabecera, visible desde cualquier página: es la única señal de que el usuario tiene una lista propia, porque no hay cuenta ni sesión.</span></li>
+        <li><span class="pin">2</span><span>Seis entradas de menú, una más que el mínimo exigido. El detalle de la noticia no entra al menú: se alcanza desde cualquier tarjeta.</span></li>
+        <li><span class="pin">3</span><span>La bienvenida y la noticia de portada comparten fila para que el primer scroll ya muestre contenido real, no solo un titular de marca.</span></li>
+        <li><span class="pin">4</span><span>La tarjeta fija el contrato de la característica 1: imagen, categoría, titular, resumen, metadatos y «Ver más». Se repite idéntica en el listado.</span></li>
+        <li><span class="pin">5</span><span>La franja oscura explica el almacenamiento local antes de que el usuario pulse un corazón y se pregunte dónde quedó guardado.</span></li>
+        <li><span class="pin">6</span><span>Los datos de contacto se repiten en el pie de las siete vistas para cumplir «información de contacto visible» sin depender de la página de contacto.</span></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
