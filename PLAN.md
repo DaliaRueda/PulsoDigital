@@ -257,7 +257,8 @@ node build.mjs && node render.mjs        # arma los artboards
 SCRATCH=<temporal> node capturas.mjs     # captura y trocea los mockups
 cd ..
 python recortar.py                       # escribe docs/entrega-1/mockups/
-python hacer-docx.py                     # escribe el .docx con formato APA 7
+python ../hacer-docx.py informe-apa.md "Entrega-1.docx" "<título>"
+python ../metadatos.py "Entrega-1.docx" "<título>" "<asunto>"
 ```
 
 `measure.mjs` comprueba que ningún artboard corte contenido por abajo.
@@ -320,8 +321,8 @@ el script de la vista.
 4. ✅ `storage.js` + `data.js` verificados con `src/pruebas.html` (25 comprobaciones)
 5. ✅ Las siete vistas del menú más `creditos.html`, la página de atribución de imágenes
 6. ✅ Pruebas de extremo a extremo con `src/pruebas-e2e.py` (38 comprobaciones)
-7. Repositorio en GitHub — **pendiente de tu usuario**
-8. Redactar el informe APA de la Entrega 2
+7. ✅ Repositorio público en https://github.com/DaliaRueda/PulsoDigital
+8. ✅ Informe APA de la Entrega 2: 51 páginas, 4 tablas, 20 figuras y 11 listados de código
 
 **Cómo ejecutar las pruebas**
 

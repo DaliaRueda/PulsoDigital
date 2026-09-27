@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
-"""Genera el Word de la Entrega 1 a partir de informe-apa.md, con formato APA 7.
+"""Genera el Word de una entrega a partir de su informe en Markdown, en APA 7.
 
 Aplica: Times New Roman 12, interlineado doble, margenes de 2,54 cm, sangria de
 primera linea de 1,27 cm, numeracion de pagina arriba a la derecha desde la
 portada, titulos de nivel 1 y 2, tablas sin lineas verticales con su numero y
 nota, figuras con su numero, titulo y nota, y referencias con sangria francesa.
 
-Uso:  python hacer-docx.py
-Sale: Entrega-1-Maquetacion-Pulso-Digital.docx
+Uso:  python ../hacer-docx.py <informe.md> <salida.docx> "<Título del trabajo>"
+Ejemplo:
+    cd docs/entrega-2
+    python ../hacer-docx.py informe-apa.md Entrega-2.docx "Pulso Digital: prototipo"
+
+Las rutas de las imágenes en el Markdown se resuelven desde la carpeta del
+propio informe. Si la ruta indicada no existe como archivo, se buscan los
+segmentos «<ruta>-1», «<ruta>-2»… en .png o .jpg, que es como quedan las
+capturas largas troceadas para que quepan en una página.
 """
 import io, os, re, glob, sys
 from docx import Document
@@ -18,8 +25,19 @@ from docx.enum.section import WD_SECTION
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-MD = 'informe-apa.md'
-SALIDA = 'Entrega-1-Maquetacion-Pulso-Digital.docx'
+MD = sys.argv[1] if len(sys.argv) > 1 else 'informe-apa.md'
+SALIDA = sys.argv[2] if len(sys.argv) > 2 else 'Entrega.docx'
+TITULO_TRABAJO = sys.argv[3] if len(sys.argv) > 3 else (
+    'Pulso Digital: maquetación de una plataforma web de noticias de '
+    'tecnología e innovación')
+# Cuarto argumento: fecha de la portada. Por omisión, la de hoy.
+if len(sys.argv) > 4:
+    FECHA = sys.argv[4]
+else:
+    _M = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+          'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+    _h = __import__('datetime').date.today()
+    FECHA = '%d de %s de %d' % (_h.day, _M[_h.month - 1], _h.year)
 FUENTE = 'Times New Roman'
 CUERPO = Pt(12)
 SANGRIA = Cm(1.27)
@@ -179,15 +197,14 @@ def par(texto='', sangria=False, align=WD_ALIGN_PARAGRAPH.LEFT, size=None,
 
 # ---- portada -------------------------------------------------------------
 PORTADA = [
-    ('Pulso Digital: maquetación de una plataforma web de noticias de '
-     'tecnología e innovación', True),
+    (TITULO_TRABAJO, True),
     ('', False),
     ('Dalia Johanna Rueda Tangarife', False),
     ('Facultad de Ingeniería, Diseño e Innovación, Politécnico Grancolombiano', False),
     ('Ingeniería de Software', False),
     ('Virtual / Front End', False),
     ('Tutor: John Olarte', False),
-    ('13 de septiembre de 2026', False),
+    (FECHA, False),
 ]
 for _ in range(3):
     par()
@@ -303,13 +320,26 @@ while i < len(lineas):
 
     if s.startswith('> FIGURA: insertar'):
         volcar()
-        base = re.search(r'`(.+?)`', s).group(1)
-        rutas = sorted(glob.glob(os.path.join(os.path.basename(os.path.dirname(base)) or 'mockups',
-                                              os.path.basename(base) + '-*.png')))
+        ruta_md = re.search(r'`(.+?)`', s).group(1)
+        # La ruta puede venir relativa al informe o a la raiz del repositorio.
+        candidatas = [ruta_md, os.path.join('..', '..', ruta_md)]
+        rutas = []
+        for base in candidatas:
+            for ext in ('', '.png', '.jpg', '.jpeg'):
+                if os.path.isfile(base + ext):
+                    rutas = [base + ext]
+                    break
+            if rutas:
+                break
+            for patron in ('-*.png', '-*.jpg'):
+                encontradas = sorted(glob.glob(base + patron))
+                if encontradas:
+                    rutas = encontradas
+                    break
+            if rutas:
+                break
         if not rutas:
-            rutas = sorted(glob.glob('mockups/' + os.path.basename(base) + '-*.png'))
-        if not rutas:
-            sys.exit('sin imagenes para ' + base)
+            sys.exit('sin imagenes para ' + ruta_md)
         for k, ruta in enumerate(rutas):
             from PIL import Image
             with Image.open(ruta) as im:

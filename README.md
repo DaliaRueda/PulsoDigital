@@ -5,7 +5,7 @@ Proyecto del módulo **Desarrollo de Front-end** — Agosto 2026.
 
 | | |
 |---|---|
-| **Repositorio** | `[PENDIENTE]` |
+| **Repositorio** | https://github.com/DaliaRueda/PulsoDigital |
 | **Despliegue** | `[PENDIENTE — Entrega 3]` |
 | **Video explicativo** | `[PENDIENTE — Entrega 3]` |
 | **Tutor** | John Olarte |
@@ -20,6 +20,9 @@ Proyecto del módulo **Desarrollo de Front-end** — Agosto 2026.
   - `hacer-docx.py` — genera el Word a partir del Markdown
   - `mockups/` — las seis vistas exportadas a PNG, en doce segmentos
 - [docs/entrega-2/](docs/entrega-2/) — prototipo funcional
+  - `Entrega-2-Prototipo-Funcional-Pulso-Digital.docx` — **documento de entrega** (APA 7, 51 páginas)
+  - `armar-informe.py` — arma el informe incrustando el código desde su origen
+  - `capturar-app.py` — captura las pantallas del aplicativo en funcionamiento
   - `creditos-imagenes.md` — autoría y licencia de las 18 fotografías
 - [docs/entrega-3/](docs/entrega-3/) — entrega final
 
@@ -28,7 +31,7 @@ Proyecto del módulo **Desarrollo de Front-end** — Agosto 2026.
 | Entrega | Semana | Estado |
 |---|---|---|
 | 1 — Maquetación | 3 | En curso |
-| 2 — Prototipo funcional | 5 | Pendiente |
+| 2 — Prototipo funcional | 5 | Entregable listo |
 | 3 — Entrega final (Angular + despliegue) | 7 | Pendiente |
 
 ## Tecnologías
