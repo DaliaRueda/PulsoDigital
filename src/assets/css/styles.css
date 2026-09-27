@@ -1,0 +1,1251 @@
+/* ============================================================================
+   Pulso Digital — hoja de estilos
+   Plataforma web de noticias de tecnología e innovación
+   Entrega 2 · Módulo Desarrollo de Front-end
+
+   Se carga DESPUÉS de Bootstrap 5.3. Bootstrap aporta la rejilla, el menú
+   responsive, la ventana modal y los estados de validación; esta hoja lo
+   re-viste con los tokens definidos en la maquetación de la Entrega 1 para
+   que el resultado corresponda con los mockups.
+
+   Índice
+     1. Tipografías
+     2. Tokens de diseño
+     3. Ajustes de Bootstrap
+     4. Base y tipografía
+     5. Cabecera y navegación
+     6. Átomos (etiquetas, chips, botones de icono, marcador de imagen)
+     7. Tarjeta de noticia
+     8. Inicio
+     9. Listado de noticias
+    10. Detalle de la noticia
+    11. Favoritos
+    12. Formularios
+    13. Tabla de gestión
+    14. Estados vacíos y avisos
+    15. Pie de página
+    16. Accesibilidad y responsive
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- 1. Tipografías */
+/* Alojadas en el proyecto: las páginas conservan su aspecto sin conexión. */
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../fonts/space-grotesk.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('../fonts/ibm-plex-sans.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------- 2. Tokens */
+
+:root {
+  /* Color */
+  --pd-ink: #14161A;
+  --pd-ink-soft: #2B2F36;
+  --pd-paper: #FAF8F5;
+  --pd-surface: #FFFFFF;
+  --pd-accent: #D6303C;
+  --pd-accent-dark: #B8262F;
+  --pd-accent-soft: #FBE9EA;
+  --pd-muted: #6B6F76;
+  --pd-border: #E4E0DA;
+  --pd-border-fuerte: #CFCAC2;
+  --pd-exito: #3F8A55;
+  --pd-exito-soft: #EEF7F0;
+
+  /* Tipografía */
+  --pd-titulares: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --pd-texto: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+
+  /* Espaciado: la escala de la maquetación */
+  --pd-e1: 8px;
+  --pd-e2: 14px;
+  --pd-e3: 20px;
+  --pd-e4: 28px;
+  --pd-e5: 56px;
+  --pd-e6: 72px;
+
+  /* Geometría */
+  --pd-radio: 3px;
+  --pd-control: 48px;
+  --pd-control-sm: 38px;
+}
+
+/* ---------------------------------------------------------------- 3. Bootstrap */
+/* Bootstrap 5.3 se configura por variables CSS; se sobrescriben las que
+   afectan al aspecto para no tener que pelear con especificidad después. */
+
+:root {
+  --bs-body-font-family: var(--pd-texto);
+  --bs-body-font-size: 1rem;
+  --bs-body-line-height: 1.65;
+  --bs-body-color: var(--pd-ink);
+  --bs-body-bg: var(--pd-paper);
+  --bs-border-color: var(--pd-border);
+  --bs-border-radius: var(--pd-radio);
+  --bs-border-radius-sm: 2px;
+  --bs-primary: var(--pd-accent);
+  --bs-primary-rgb: 214, 48, 60;
+  --bs-link-color: var(--pd-ink);
+  --bs-link-color-rgb: 20, 22, 26;
+  --bs-link-hover-color: var(--pd-accent);
+  --bs-link-hover-color-rgb: 214, 48, 60;
+  --bs-form-invalid-color: var(--pd-accent);
+  --bs-form-invalid-border-color: var(--pd-accent);
+  --bs-form-valid-color: var(--pd-exito);
+  --bs-form-valid-border-color: var(--pd-exito);
+  --bs-emphasis-color: var(--pd-ink);
+  --bs-secondary-color: var(--pd-muted);
+}
+
+/* Un .row con separación g-5 sobresale 12 px por cada lado del .container: el
+   contenedor calcula su relleno con el gutter por defecto (1,5 rem) mientras la
+   fila aplica márgenes negativos con el suyo (3 rem). Esta clase iguala ambos y
+   evita el desplazamiento horizontal en móvil. */
+.pd-contenedor-ancho {
+  --bs-gutter-x: 3rem;
+}
+
+/* El contenedor del sistema de diseño mide 1200 px, no los 1140 de Bootstrap. */
+@media (min-width: 1200px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-xxl {
+    max-width: 1200px;
+  }
+}
+
+/* ---------------------------------------------------------------- 4. Base */
+
+body {
+  background: var(--pd-paper);
+  color: var(--pd-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.pd-titular {
+  font-family: var(--pd-titulares);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--pd-ink);
+}
+
+h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 2.875rem); }   /*  32 → 46 px */
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.3vw, 1.875rem); } /*  24 → 30 px */
+h3 { font-size: 1.25rem; line-height: 1.24; }              /*  20 px      */
+
+a { text-decoration: none; }
+
+/* Antetítulo en versalitas: abre casi todas las secciones. */
+.pd-kicker {
+  display: block;
+  font-size: 0.6875rem;          /* 11 px */
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pd-accent);
+}
+
+.pd-meta {
+  font-size: 0.78125rem;         /* 12,5 px */
+  color: var(--pd-muted);
+}
+
+/* Regla superior gruesa que encabeza las secciones, como en la maquetación. */
+.pd-seccion-cab {
+  border-top: 2px solid var(--pd-ink);
+  padding-top: var(--pd-e3);
+  margin-bottom: var(--pd-e4);
+}
+
+.pd-regla {
+  height: 1px;
+  background: var(--pd-border);
+  border: 0;
+  opacity: 1;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- 5. Cabecera */
+
+.pd-topbar {
+  background: var(--pd-ink);
+  color: #C9CCD1;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.pd-topbar__interior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pd-e2);
+  min-height: 36px;
+  padding-block: 6px;
+}
+
+.pd-topbar__edicion {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pd-masthead {
+  background: var(--pd-surface);
+  border-bottom: 1px solid var(--pd-border);
+}
+
+.pd-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-marca__nombre {
+  font-family: var(--pd-titulares);
+  font-weight: 700;
+  font-size: 1.875rem;           /* 30 px */
+  letter-spacing: -0.035em;
+  color: var(--pd-ink);
+  white-space: nowrap;
+}
+
+.pd-marca__lema {
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pd-muted);
+  border-left: 1px solid var(--pd-border);
+  padding-left: 12px;
+}
+
+/* Buscador de la cabecera. El ancho se fija aquí y no en línea: en móvil
+   debe encogerse, y un ancho fijo desbordaba la página en horizontal. */
+.pd-buscador--cabecera {
+  width: 270px;
+  max-width: 100%;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.pd-buscador {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 44px;
+  padding-inline: 16px;
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: 2px;
+  color: var(--pd-muted);
+}
+
+.pd-buscador input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 0.875rem;
+  color: var(--pd-ink);
+  width: 100%;
+  min-width: 0;
+}
+
+/* Acceso a favoritos con su contador */
+.pd-favlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding-inline: 16px;
+  border: 1px solid var(--pd-ink);
+  border-radius: 2px;
+  font-size: 0.84375rem;
+  font-weight: 600;
+  color: var(--pd-ink);
+}
+
+.pd-favlink:hover,
+.pd-favlink:focus-visible {
+  background: var(--pd-ink);
+  color: var(--pd-surface);
+}
+
+.pd-favlink__contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding-inline: 6px;
+  background: var(--pd-accent);
+  color: #FFF;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Barra de navegación (navbar de Bootstrap re-vestida) */
+.pd-nav {
+  background: var(--pd-surface);
+  border-bottom: 2px solid var(--pd-ink);
+  padding-block: 0;
+}
+
+.pd-nav .nav-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pd-ink);
+  padding: 14px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.pd-nav .nav-link:hover,
+.pd-nav .nav-link:focus-visible {
+  color: var(--pd-accent);
+}
+
+.pd-nav .nav-link.activo {
+  color: var(--pd-accent);
+  border-bottom-color: var(--pd-accent);
+}
+
+.pd-nav .navbar-nav {
+  gap: 30px;
+}
+
+.pd-nav .navbar-toggler {
+  border-color: var(--pd-border);
+  border-radius: 2px;
+  padding: 6px 10px;
+}
+
+.pd-nav .navbar-toggler:focus {
+  box-shadow: none;
+  outline: 2px solid var(--pd-accent);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------- 6. Átomos */
+
+/* Etiqueta de categoría: informativa, no interactiva. */
+.pd-badge {
+  display: inline-block;
+  /* dentro de una tarjeta el padre es flex en columna: sin esto se estiraria */
+  align-self: flex-start;
+  width: fit-content;
+  font-size: 0.65625rem;         /* 10,5 px */
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pd-accent);
+  background: var(--pd-accent-soft);
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+
+.pd-badge--ink {
+  color: #FFF;
+  background: var(--pd-ink);
+}
+
+/* Chip de filtro: interactivo, admite un único valor activo. */
+.pd-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding-inline: 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--pd-ink-soft);
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.pd-chip:hover {
+  border-color: var(--pd-ink);
+}
+
+.pd-chip[aria-pressed='true'] {
+  background: var(--pd-ink);
+  border-color: var(--pd-ink);
+  color: #FFF;
+}
+
+/* Botones: se re-visten los de Bootstrap para conservar su comportamiento. */
+.btn {
+  --bs-btn-border-radius: 2px;
+  font-family: var(--pd-texto);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: var(--pd-control);
+  padding-inline: 24px;
+}
+
+.btn-sm {
+  height: var(--pd-control-sm);
+  padding-inline: 16px;
+  font-size: 0.8125rem;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--pd-accent);
+  --bs-btn-border-color: var(--pd-accent);
+  --bs-btn-hover-bg: var(--pd-accent-dark);
+  --bs-btn-hover-border-color: var(--pd-accent-dark);
+  --bs-btn-active-bg: var(--pd-accent-dark);
+  --bs-btn-active-border-color: var(--pd-accent-dark);
+  --bs-btn-disabled-bg: var(--pd-accent);
+  --bs-btn-disabled-border-color: var(--pd-accent);
+}
+
+.btn-ink {
+  --bs-btn-color: #FFF;
+  --bs-btn-bg: var(--pd-ink);
+  --bs-btn-border-color: var(--pd-ink);
+  --bs-btn-hover-color: #FFF;
+  --bs-btn-hover-bg: #000;
+  --bs-btn-hover-border-color: #000;
+}
+
+.btn-ghost {
+  --bs-btn-color: var(--pd-ink);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--pd-ink);
+  --bs-btn-hover-color: #FFF;
+  --bs-btn-hover-bg: var(--pd-ink);
+  --bs-btn-hover-border-color: var(--pd-ink);
+}
+
+/* Botón de icono: el corazón de favoritos y las acciones de tabla. */
+.pd-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pd-control-sm);
+  height: var(--pd-control-sm);
+  border: 1px solid var(--pd-border);
+  background: var(--pd-surface);
+  border-radius: 2px;
+  color: var(--pd-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.pd-iconbtn:hover {
+  color: var(--pd-accent);
+  border-color: var(--pd-accent);
+}
+
+/* Estado activo del favorito: cambia color y relleno, no solo el color. */
+.pd-iconbtn[aria-pressed='true'] {
+  color: var(--pd-accent);
+  border-color: var(--pd-accent);
+  background: var(--pd-accent-soft);
+}
+
+.pd-iconbtn[aria-pressed='true'] svg {
+  fill: currentColor;
+}
+
+/* Marcador de imagen: se usa cuando una noticia creada no aporta imagen. */
+.pd-marcador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E9E5DF;
+  border: 1px solid var(--pd-border);
+  color: #9A958D;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(20, 22, 26, 0.055) 0 2px,
+    transparent 2px 10px
+  );
+}
+
+.pd-marcador span {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(250, 248, 245, 0.9);
+  border: 1px solid var(--pd-border);
+  padding: 5px 10px;
+}
+
+/* ---------------------------------------------------------------- 7. Tarjeta */
+
+.pd-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;                  /* iguala la altura dentro de la fila */
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  overflow: hidden;
+}
+
+.pd-card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #E9E5DF;
+}
+
+.pd-card__cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--pd-e3) var(--pd-e3) 0;
+  flex-grow: 1;
+}
+
+.pd-card__titulo {
+  font-size: 1.25rem;
+  line-height: 1.24;
+}
+
+.pd-card__titulo a { color: inherit; }
+.pd-card__titulo a:hover { color: var(--pd-accent); }
+
+.pd-card__resumen {
+  font-size: 0.90625rem;         /* 14,5 px */
+  color: var(--pd-muted);
+  line-height: 1.58;
+  margin: 0;
+}
+
+.pd-card__pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pd-e1);
+  padding: var(--pd-e2) var(--pd-e3);
+  border-top: 1px solid var(--pd-border);
+  margin-top: 18px;
+}
+
+.pd-mas {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--pd-accent);
+  white-space: nowrap;
+}
+
+.pd-mas:hover { color: var(--pd-accent-dark); }
+
+/* ---------------------------------------------------------------- 8. Inicio */
+
+.pd-hero { padding-block: var(--pd-e6) 60px; }
+
+.pd-hero__titular {
+  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 3.625rem);   /* 36 → 58 px */
+  letter-spacing: -0.035em;
+  text-wrap: balance;            /* reparte las líneas en vez de dejar una suelta */
+}
+
+.pd-hero__entrada {
+  font-size: 1.09375rem;
+  color: var(--pd-ink-soft);
+  line-height: 1.62;
+}
+
+/* Noticia de portada */
+.pd-portada {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  overflow: hidden;
+}
+
+.pd-portada__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.pd-portada__cuerpo {
+  padding: 26px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pd-e2);
+}
+
+.pd-portada__titulo { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2rem); line-height: 1.18; }
+
+/* Franja oscura de llamado a la acción */
+.pd-cta {
+  background: var(--pd-ink);
+  color: #FFF;
+  padding-block: var(--pd-e6);
+}
+
+.pd-cta h2 { color: #FFF; }
+.pd-cta p { color: #B9BDC4; }
+
+.btn-outline-claro {
+  --bs-btn-color: #FFF;
+  --bs-btn-border-color: #4A4F58;
+  --bs-btn-bg: transparent;
+  --bs-btn-hover-color: var(--pd-ink);
+  --bs-btn-hover-bg: #FFF;
+  --bs-btn-hover-border-color: #FFF;
+}
+
+/* Sección informativa */
+.pd-info {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  padding: 30px 28px 32px;
+  height: 100%;
+}
+
+/* ---------------------------------------------------------------- 9. Listado */
+
+.pd-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pd-orden {
+  height: 52px;
+  border: 1px solid var(--pd-border-fuerte);
+  border-radius: 2px;
+  font-size: 0.9375rem;
+  padding-inline: 18px;
+}
+
+.pd-busqueda {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  height: 52px;
+  padding-inline: 18px;
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border-fuerte);
+  border-radius: 2px;
+  color: var(--pd-muted);
+}
+
+.pd-busqueda input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 0.96875rem;
+  color: var(--pd-ink);
+  width: 100%;
+}
+
+/* Paginación */
+.pd-paginacion {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--pd-e1);
+}
+
+.pd-pagina {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding-inline: 10px;
+  border: 1px solid var(--pd-border);
+  background: var(--pd-surface);
+  color: var(--pd-ink);
+  font-size: 0.875rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.pd-pagina:hover:not(:disabled) { border-color: var(--pd-ink); }
+
+.pd-pagina[aria-current='page'] {
+  background: var(--pd-ink);
+  border-color: var(--pd-ink);
+  color: #FFF;
+  font-weight: 600;
+}
+
+.pd-pagina:disabled {
+  color: var(--pd-muted);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* --------------------------------------------------------------- 10. Detalle */
+
+.pd-migas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78125rem;
+  color: var(--pd-muted);
+}
+
+.pd-migas a { color: var(--pd-muted); }
+.pd-migas a:hover { color: var(--pd-accent); }
+
+/* La cabecera del artículo se estrecha respecto al resto: recurso editorial. */
+.pd-articulo__cab {
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.pd-articulo__titular {
+  font-size: clamp(2rem, 1.2rem + 3.2vw, 3.375rem);      /* 32 → 54 px */
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.pd-articulo__entradilla {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: var(--pd-muted);
+}
+
+.pd-firma {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--pd-e2);
+  border-top: 1px solid var(--pd-border);
+  border-bottom: 1px solid var(--pd-border);
+  padding-block: 16px;
+}
+
+.pd-articulo__portada {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200 / 470;
+  object-fit: cover;
+  border: 1px solid var(--pd-border);
+}
+
+/* Cuerpo: el ancho de lectura se limita aunque sobre espacio. */
+.pd-prosa { max-width: 680px; }
+
+.pd-prosa p {
+  font-size: 1.125rem;
+  line-height: 1.78;
+  color: var(--pd-ink-soft);
+  margin: 0;
+}
+
+.pd-prosa p + p { margin-top: 22px; }
+
+.pd-prosa p:first-child {
+  font-size: 1.21875rem;
+  font-weight: 500;
+  color: var(--pd-ink);
+}
+
+.pd-cita {
+  border-left: 3px solid var(--pd-accent);
+  padding: 4px 0 4px 24px;
+  margin-block: 30px;
+  font-family: var(--pd-titulares);
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--pd-ink);
+}
+
+/* Botón de favorito del detalle en estado activo: cambia fondo, borde y relleno
+   del icono, no solo el color, para que se distinga sin depender de él. */
+.pd-boton-fav--activo {
+  background: var(--pd-accent-soft);
+  color: var(--pd-accent);
+  border-color: var(--pd-accent);
+}
+
+.pd-boton-fav--activo svg { fill: currentColor; }
+
+.pd-panel {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  padding: 24px;
+}
+
+.pd-panel--ink {
+  background: var(--pd-ink);
+  color: #B9BDC4;
+  border-color: var(--pd-ink);
+}
+
+.pd-ficha {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pd-ficha li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 11px;
+  border-bottom: 1px solid var(--pd-border);
+  font-size: 0.875rem;
+}
+
+.pd-ficha li:last-child { border-bottom: 0; }
+.pd-ficha dt, .pd-ficha .clave { color: var(--pd-muted); }
+.pd-ficha dd, .pd-ficha .valor { font-weight: 500; text-align: right; margin: 0; }
+
+/* -------------------------------------------------------------- 11. Favoritos */
+
+/* Disposición horizontal: diferencia la lista personal del catálogo. */
+.pd-fav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  padding: 18px;
+}
+
+.pd-fav__img {
+  width: 200px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.pd-fav__datos { flex-grow: 1; min-width: 0; }
+
+.pd-fav__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex-shrink: 0;
+  width: 190px;
+}
+
+.pd-fav.saliendo {
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ------------------------------------------------------------- 12. Formularios */
+
+.pd-form {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  padding: 36px;
+}
+
+.form-label {
+  font-size: 0.78125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--pd-ink-soft);
+  margin-bottom: 7px;
+}
+
+.form-control,
+.form-select {
+  min-height: var(--pd-control);
+  padding: 10px 14px;
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border-fuerte);
+  border-radius: 2px;
+  font-size: 0.9375rem;
+  color: var(--pd-ink);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--pd-ink);
+  box-shadow: none;
+}
+
+.form-control::placeholder { color: #A8A39B; }
+
+textarea.form-control { min-height: 150px; }
+
+/* Estados de validación: Bootstrap los aplica, aquí se re-visten. */
+.form-control.is-invalid,
+.form-select.is-invalid {
+  background-color: #FEF7F7;
+  border-color: var(--pd-accent);
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+  border-color: var(--pd-exito);
+}
+
+.invalid-feedback {
+  font-size: 0.78125rem;
+  font-weight: 500;
+  color: var(--pd-accent);
+}
+
+.form-text {
+  font-size: 0.78125rem;
+  color: var(--pd-muted);
+}
+
+.form-check-input:checked {
+  background-color: var(--pd-ink);
+  border-color: var(--pd-ink);
+}
+
+.form-check-input:focus {
+  border-color: var(--pd-ink);
+  box-shadow: none;
+  outline: 2px solid var(--pd-accent);
+  outline-offset: 1px;
+}
+
+.pd-contador {
+  font-size: 0.78125rem;
+  color: var(--pd-muted);
+  white-space: nowrap;
+}
+
+/* Aviso de confirmación tras un envío válido */
+.pd-alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 2px;
+  border-left: 3px solid;
+  font-size: 0.90625rem;
+}
+
+.pd-alerta--ok {
+  background: var(--pd-exito-soft);
+  border-color: var(--pd-exito);
+  color: #245536;
+}
+
+/* ---------------------------------------------------------- 13. Tabla gestión */
+
+.pd-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--pd-surface);
+}
+
+.pd-tabla th {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pd-muted);
+  text-align: left;
+  padding: var(--pd-e2) 16px;
+  border-bottom: 1px solid var(--pd-border);
+  white-space: nowrap;
+}
+
+.pd-tabla td {
+  padding: var(--pd-e2) 16px;
+  border-bottom: 1px solid var(--pd-border);
+  font-size: 0.875rem;
+  vertical-align: middle;
+}
+
+.pd-tabla tbody tr:hover { background: #FCFBF9; }
+
+.pd-tabla__miniatura {
+  width: 58px;
+  height: 40px;
+  object-fit: cover;
+  display: block;
+}
+
+.pd-origen {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 9px;
+  border-radius: 2px;
+  background: #EFEBE5;
+  color: var(--pd-muted);
+}
+
+.pd-origen--nueva {
+  background: #EAF3ED;
+  color: #2F6B44;
+}
+
+/* Ventana modal de confirmación (modal de Bootstrap re-vestido) */
+.modal-content {
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  box-shadow: 0 18px 40px rgba(20, 22, 26, 0.14);
+}
+
+.modal-header, .modal-footer { border-color: var(--pd-border); }
+
+/* ------------------------------------------------------ 14. Estados y avisos */
+
+.pd-vacio {
+  background: var(--pd-surface);
+  border: 1px dashed var(--pd-border-fuerte);
+  border-radius: var(--pd-radio);
+  padding: 56px var(--pd-e3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pd-e2);
+  text-align: center;
+}
+
+.pd-vacio p {
+  font-size: 0.96875rem;
+  color: var(--pd-muted);
+  max-width: 460px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.pd-aviso {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  background: #F0ECE6;
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radio);
+  padding: 18px 20px;
+  font-size: 0.90625rem;
+  color: var(--pd-ink-soft);
+  line-height: 1.6;
+}
+
+.pd-aviso code {
+  font-size: 0.875rem;
+  background: #E4E0DA;
+  color: var(--pd-ink);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* Notificación flotante tras guardar o eliminar */
+.pd-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%) translateY(12px);
+  z-index: 1080;
+  background: var(--pd-ink);
+  color: #FFF;
+  font-size: 0.90625rem;
+  padding: 14px 22px;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(20, 22, 26, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pd-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* --------------------------------------------------------------- 15. Pie */
+
+.pd-footer {
+  background: var(--pd-ink);
+  color: #B9BDC4;
+}
+
+.pd-footer a { color: #B9BDC4; }
+.pd-footer a:hover { color: #FFF; }
+
+.pd-footer h2 {
+  color: #FFF;
+  font-family: var(--pd-texto);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pd-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 0.90625rem;
+}
+
+.pd-footer__abajo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--pd-e2);
+  border-top: 1px solid #2C3038;
+  padding-block: var(--pd-e3);
+  font-size: 0.78125rem;
+}
+
+.pd-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pd-control-sm);
+  height: var(--pd-control-sm);
+  border: 1px solid #2C3038;
+  border-radius: 2px;
+  color: #B9BDC4;
+}
+
+.pd-social:hover {
+  border-color: #B9BDC4;
+  color: #FFF;
+}
+
+/* -------------------------------------------- 16. Accesibilidad y responsive */
+
+/* Foco siempre visible: requisito de accesibilidad RNF-03. */
+:focus-visible {
+  outline: 2px solid var(--pd-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Enlace para saltar al contenido, primero en el orden de tabulación. */
+.pd-saltar {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1090;
+  background: var(--pd-ink);
+  color: #FFF;
+  padding: 12px 18px;
+}
+
+.pd-saltar:focus {
+  left: 12px;
+  top: 12px;
+  color: #FFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Tableta: 576 – 991 px */
+@media (max-width: 991.98px) {
+  .pd-nav .navbar-nav { gap: 0; }
+
+  .pd-nav .nav-link {
+    padding: 10px 0;
+    border-bottom: 0;
+    border-left: 2px solid transparent;
+    padding-left: 12px;
+  }
+
+  .pd-nav .nav-link.activo {
+    border-bottom-color: transparent;
+    border-left-color: var(--pd-accent);
+  }
+
+  .pd-hero { padding-block: var(--pd-e5) var(--pd-e4); }
+  .pd-articulo__cab { max-width: none; }
+  .pd-prosa { max-width: none; }
+}
+
+/* Móvil: por debajo de 576 px */
+@media (max-width: 575.98px) {
+  .pd-topbar__interior {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .pd-marca__lema { display: none; }
+
+  /* La cabecera pasa a dos filas: marca arriba, buscador y favoritos debajo. */
+  .pd-cabecera__acciones {
+    width: 100%;
+    justify-content: stretch !important;
+  }
+
+  .pd-buscador--cabecera { width: auto; flex-grow: 1; }
+
+  .pd-fav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--pd-e2);
+  }
+
+  .pd-fav__img { width: 100%; }
+  .pd-fav__acciones { width: 100%; }
+
+  .pd-form { padding: var(--pd-e3); }
+  .pd-vacio { padding: var(--pd-e4) var(--pd-e2); }
+
+  /* La tabla de gestión se desplaza en horizontal antes que comprimirse. */
+  .pd-tabla-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pd-tabla { min-width: 640px; }
+}
+
+/* Impresión: fuera la interfaz que no aporta al papel. */
+@media print {
+  .pd-topbar,
+  .pd-nav,
+  .pd-cta,
+  .pd-footer,
+  .pd-iconbtn,
+  .pd-paginacion { display: none !important; }
+
+  body { background: #FFF; }
+  .pd-card { break-inside: avoid; }
+}

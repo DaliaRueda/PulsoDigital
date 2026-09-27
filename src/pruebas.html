@@ -1,0 +1,57 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>pendiente</title>
+<script src="assets/data/noticias-respaldo.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/data.js"></script>
+</head><body><pre id="salida"></pre>
+<script>
+const r = [];
+const ok = (etiqueta, real, esperado) =>
+  r.push((String(real) === String(esperado) ? 'OK   ' : 'FALLA') + ' ' + etiqueta + ': ' + real + (String(real) === String(esperado) ? '' : ' (esperado ' + esperado + ')'));
+
+PD.almacen.vaciarFavoritos();
+PD.almacen.restaurarBase();
+
+PD.datos.cargar().then(lista => {
+  ok('total de noticias', lista.length, 18);
+  ok('destacadas', PD.datos.destacadas(lista).length, 4);
+  ok('orden por defecto (mas reciente primero)', lista[0].id, 'n-001');
+  ok('filtro por categoria', PD.datos.filtrar(lista, {categoria:'Hardware'}).length, 3);
+  ok('busqueda sin acentos "medellin" -> Medellin', PD.datos.filtrar(lista, {texto:'medellin'}).length, 1);
+  ok('busqueda con acento "Medellín"', PD.datos.filtrar(lista, {texto:'Medellín'}).length, 1);
+  ok('categoria NO entra en la busqueda (como el mockup)', PD.datos.filtrar(lista, {texto:'innovacion'}).length, 0);
+  ok('texto + categoria se combinan', PD.datos.filtrar(lista, {texto:'modelo', categoria:'Inteligencia Artificial'}).length > 0, true);
+  ok('busqueda mayusculas "PASSKEY"', PD.datos.filtrar(lista, {texto:'PASSKEY'}).length, 1);
+  ok('paginas de 6', PD.datos.totalPaginas(lista.length), 3);
+  ok('pagina 3 tiene 6', PD.datos.paginar(lista, 3).length, 6);
+  ok('orden alfabetico', PD.datos.ordenar(lista,'alfabetico')[0].titulo.charAt(0), 'C');
+  ok('relacionadas excluyen la actual', PD.datos.relacionadas(lista, lista[0], 3).some(n => n.id === lista[0].id), false);
+
+  ok('favoritos vacios', PD.almacen.contarFavoritos(), 0);
+  ok('alternar devuelve true al guardar', PD.almacen.alternarFavorito('n-005'), true);
+  ok('esFavorito', PD.almacen.esFavorito('n-005'), true);
+  ok('alternar devuelve false al quitar', PD.almacen.alternarFavorito('n-005'), false);
+  ok('favoritos tras quitar', PD.almacen.contarFavoritos(), 0);
+
+  ok('siguiente id', PD.almacen.siguienteId(), 'u-001');
+  PD.almacen.agregarNoticia({id:'u-001', titulo:'Prueba', categoria:'Software', fecha:'2026-09-27', destacada:false});
+  ok('siguiente id tras crear', PD.almacen.siguienteId(), 'u-002');
+  ok('esCreada', PD.datos.esCreada({id:'u-001'}), true);
+
+  PD.almacen.marcarEliminada('n-018');
+  return PD.datos.cargar();
+}).then(lista2 => {
+  ok('tras crear una y ocultar otra', lista2.length, 18);
+  ok('la oculta desaparece', lista2.some(n => n.id === 'n-018'), false);
+  ok('la creada aparece', lista2.some(n => n.id === 'u-001'), true);
+  PD.almacen.restaurarBase();
+  return PD.datos.cargar();
+}).then(l3 => {
+  ok('restaurar base', l3.some(n => n.id === 'n-018'), true);
+  PD.almacen.eliminarCreada('u-001');
+  document.getElementById('salida').textContent = r.join('\n');
+  document.title = r.some(x => x.startsWith('FALLA')) ? 'HAY-FALLOS' : 'TODO-OK';
+}).catch(e => {
+  document.getElementById('salida').textContent = 'ERROR: ' + e.message;
+  document.title = 'ERROR';
+});
+</script></body></html>
