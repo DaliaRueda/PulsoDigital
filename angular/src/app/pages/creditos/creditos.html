@@ -1,0 +1,54 @@
+<section class="pt-5">
+  <div class="container">
+    <span class="pd-kicker">Atribución</span>
+    <h1 class="mt-2">Créditos de imágenes</h1>
+    <p class="pd-hero__entrada mt-3" style="max-width:720px">
+      Todas las fotografías de este sitio tienen licencia Creative Commons y se han obtenido a
+      través de Openverse. Las licencias CC&nbsp;BY y CC&nbsp;BY-SA obligan a nombrar al autor,
+      la licencia y el origen; aquí está esa información para cada una.
+    </p>
+    <hr class="pd-regla mt-4">
+  </div>
+</section>
+
+<section class="pt-4 pb-5">
+  <div class="container">
+    <div class="pd-tabla-scroll" style="border:1px solid var(--pd-border);border-radius:3px;overflow:hidden">
+      <table class="pd-tabla">
+        <caption class="visually-hidden">Autoría y licencia de cada fotografía</caption>
+        <thead>
+          <tr>
+            <th scope="col" style="width:86px">Imagen</th>
+            <th scope="col">Noticia</th>
+            <th scope="col">Fotografía</th>
+            <th scope="col" style="width:150px">Autor</th>
+            <th scope="col" style="width:130px">Licencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (n of noticias(); track n.id) {
+            <tr>
+              <td>
+                @if (n.imagen) {
+                  <img class="pd-tabla__miniatura" [src]="n.imagen" alt="">
+                } @else {
+                  <div class="pd-marcador pd-tabla__miniatura"></div>
+                }
+              </td>
+              <td><a [routerLink]="['/noticias', n.id]">{{ n.titulo }}</a></td>
+              @if (n.credito; as c) {
+                <td>
+                  <a [href]="c.url" target="_blank" rel="noopener noreferrer">«{{ c.titulo }}»</a>
+                </td>
+                <td>{{ c.autor }}</td>
+                <td>{{ c.licencia }}</td>
+              } @else {
+                <td colspan="3" class="pd-meta">Sin fotografía: se muestra un marcador.</td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+# Compila la aplicación Angular y la publica en GitHub Pages.
+#
+# Se ejecuta en cada envío a la rama principal, de modo que el despliegue
+# siempre refleja lo que hay en el repositorio. También puede lanzarse a mano
+# desde la pestaña Actions.
+#
+# Requiere que en Settings → Pages la fuente esté puesta en «GitHub Actions».
+
+name: Desplegar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un despliegue a la vez; si llegan varios, se atiende el último.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: angular/package-lock.json
+
+      - name: Instalar dependencias
+        working-directory: angular
+        run: npm ci
+
+      - name: Compilar para GitHub Pages
+        working-directory: angular
+        run: npm run build:pages
+
+      - name: Preparar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir la compilación
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: angular/dist/pulso-digital/browser
+
+  desplegar:
+    needs: compilar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: Publicar
+        id: despliegue
+        uses: actions/deploy-pages@v4

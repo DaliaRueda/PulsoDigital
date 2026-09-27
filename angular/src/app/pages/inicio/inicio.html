@@ -1,0 +1,164 @@
+<!-- ===== Bienvenida y noticia de portada ===== -->
+<section class="pd-hero">
+  <div class="container pd-contenedor-ancho">
+    <div class="row g-5 align-items-start">
+
+      <div class="col-12 col-lg-5">
+        <span class="pd-kicker">Bienvenido a Pulso Digital</span>
+        <h1 class="pd-hero__titular mt-3">Tecnología contada como se debe contar.</h1>
+        <p class="pd-hero__entrada mt-3">
+          Reportajes, análisis y noticias verificadas sobre inteligencia artificial, startups,
+          software, hardware, ciberseguridad e innovación. Guarda lo que te interesa y vuelve
+          a leerlo cuando quieras.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mt-4">
+          <a routerLink="/noticias" class="btn btn-primary">
+            Explorar noticias
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h13" /><path d="M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a routerLink="/contacto" class="btn btn-ghost">Contactar a la redacción</a>
+        </div>
+        <p class="pd-meta mt-3">Portada actualizada de lunes a viernes.</p>
+      </div>
+
+      <div class="col-12 col-lg-7">
+        @if (portada(); as n) {
+          <article class="pd-portada">
+            @if (n.imagen) {
+              <img class="pd-portada__img" [src]="n.imagen" [alt]="n.titulo">
+            }
+            <div class="pd-portada__cuerpo">
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="pd-badge pd-badge--ink">Portada</span>
+                <span class="pd-badge">{{ n.categoria }}</span>
+              </div>
+              <h2 class="pd-portada__titulo">
+                <a [routerLink]="['/noticias', n.id]">{{ n.titulo }}</a>
+              </h2>
+              <p class="pd-card__resumen" style="font-size:0.96875rem">{{ n.resumen }}</p>
+              <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap border-top pt-3 mt-1">
+                <span class="pd-meta">
+                  Por {{ n.autor }} · {{ n.fecha | fechaEs }} · {{ n.tiempoLectura }} min de lectura
+                </span>
+                <a [routerLink]="['/noticias', n.id]" class="pd-mas">Ver más →</a>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Noticias destacadas ===== -->
+<section class="pb-5">
+  <div class="container">
+    <div class="pd-seccion-cab d-flex align-items-end justify-content-between flex-wrap gap-2">
+      <div>
+        <span class="pd-kicker">Selección de la redacción</span>
+        <h2 class="mt-2">Noticias destacadas</h2>
+      </div>
+      <a routerLink="/noticias" class="pd-mas">Ver todas las noticias →</a>
+    </div>
+
+    <div class="row g-4">
+      @for (n of destacadas(); track n.id) {
+        <div class="col-12 col-sm-6 col-lg-4">
+          <!-- @Input hacia la tarjeta, @Output de vuelta -->
+          <app-noticia-card
+            [noticia]="n"
+            [favorito]="esFavorito(n.id)"
+            (alternar)="alternarFavorito($event)" />
+        </div>
+      } @empty {
+        @if (!cargando()) {
+          <div class="col-12">
+            <div class="pd-vacio">
+              <h3>Todavía no hay noticias destacadas</h3>
+              <p>Marca una noticia como destacada al publicarla y aparecerá aquí.</p>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===== Llamado a la acción ===== -->
+<section class="pd-cta">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-lg-8">
+        <span class="pd-kicker">Tu lista personal</span>
+        <h2 class="mt-2" style="font-size:clamp(1.75rem,1.2rem+2vw,2.375rem)">
+          Guarda una noticia hoy y encuéntrala cuando la necesites
+        </h2>
+        <p class="mt-3 mb-0" style="font-size:1.03125rem">
+          Sin registro y sin contraseñas: tus favoritos se guardan en tu propio navegador.
+        </p>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="d-flex flex-column gap-2">
+          <a routerLink="/favoritos" class="btn btn-primary">Ver mis favoritos</a>
+          <a routerLink="/noticias" class="btn btn-outline-claro">Explorar el archivo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Sección informativa ===== -->
+<section class="py-5">
+  <div class="container">
+    <div class="pd-seccion-cab">
+      <span class="pd-kicker">Cómo trabajamos</span>
+      <h2 class="mt-2">Tres compromisos con quien nos lee</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <div class="pd-info">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D6303C"
+               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l7.5 3v5.4c0 4.6-3.1 8.3-7.5 9.6-4.4-1.3-7.5-5-7.5-9.6V6z" />
+            <path d="M9 12l2.2 2.2L15.5 10" />
+          </svg>
+          <h3 class="mt-3">Dos fuentes, siempre</h3>
+          <p class="pd-card__resumen mt-2">
+            Ninguna nota se publica con una sola fuente. Si algo no se puede verificar,
+            lo decimos en el texto.
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="pd-info">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D6303C"
+               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6h16" /><path d="M4 12h10" /><path d="M4 18h13" />
+          </svg>
+          <h3 class="mt-3">Titulares sin anzuelo</h3>
+          <p class="pd-card__resumen mt-2">
+            El titular dice lo que pasó. El tiempo de lectura aparece antes de que decidas entrar.
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="pd-info">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D6303C"
+               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 4v7l3-2 3 2V4" />
+          </svg>
+          <h3 class="mt-3">Tu lista es tuya</h3>
+          <p class="pd-card__resumen mt-2">
+            Los favoritos viven en tu navegador. No pedimos correo, no creamos perfil,
+            no compartimos nada.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

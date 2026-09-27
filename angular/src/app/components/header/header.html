@@ -1,0 +1,76 @@
+<!-- Franja superior con la fecha del día -->
+<div class="pd-topbar">
+  <div class="container">
+    <div class="pd-topbar__interior">
+      <span>{{ fechaDeHoy }}</span>
+      <span class="pd-topbar__edicion">Tecnología e innovación · Edición Colombia</span>
+    </div>
+  </div>
+</div>
+
+<!-- Marca, buscador y acceso a favoritos -->
+<div class="pd-masthead">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap py-3">
+
+      <a class="pd-marca" routerLink="/" aria-label="Pulso Digital, ir al inicio">
+        <svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="#D6303C"
+             stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 17h6l3.6-10 5.6 20 3.6-10H30" />
+        </svg>
+        <span class="pd-marca__nombre">Pulso Digital</span>
+        <span class="pd-marca__lema">El latido de la innovación</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-3 flex-grow-1 justify-content-end pd-cabecera__acciones">
+        <form class="pd-buscador pd-buscador--cabecera" role="search" (ngSubmit)="buscar()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" /><path d="M20 20l-3.6-3.6" />
+          </svg>
+          <label class="visually-hidden" for="pd-q">Buscar noticias</label>
+          <!-- Enlazado en dos sentidos: el campo y la propiedad «termino» -->
+          <input id="pd-q" name="q" type="search" placeholder="Buscar noticias…"
+                 autocomplete="off" [(ngModel)]="termino">
+        </form>
+
+        <a routerLink="/favoritos" class="pd-favlink">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 20.2S4.6 15.5 4.6 10.4A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 7.4 3.4c0 5.1-7.4 9.8-7.4 9.8z" />
+          </svg>
+          Favoritos
+          <!-- Interpolación de una señal: se repinta sola al cambiar -->
+          <span class="pd-favlink__contador">{{ cuantosFavoritos() }}</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg pd-nav" aria-label="Navegación principal">
+  <div class="container">
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+            data-bs-target="#pd-menu" aria-controls="pd-menu" aria-expanded="false"
+            aria-label="Mostrar u ocultar el menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="pd-menu">
+      <ul class="navbar-nav">
+        @for (p of paginas; track p.ruta) {
+          <li class="nav-item">
+            <a class="nav-link"
+               [routerLink]="p.ruta"
+               routerLinkActive="activo"
+               [routerLinkActiveOptions]="{ exact: p.ruta === '/' }">{{ p.texto }}</a>
+          </li>
+        }
+      </ul>
+      <span class="pd-meta ms-lg-auto d-none d-lg-block"
+            style="font-size:12px;letter-spacing:.1em;text-transform:uppercase">Actualizado hoy</span>
+    </div>
+  </div>
+</nav>

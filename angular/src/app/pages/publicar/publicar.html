@@ -1,0 +1,248 @@
+<section class="pt-5">
+  <div class="container">
+    <span class="pd-kicker">Gestión de contenido</span>
+    <h1 class="mt-2">Publicar y gestionar noticias</h1>
+    <p class="pd-hero__entrada mt-3" style="max-width:700px">
+      Crea una nota nueva o elimina una existente. Los cambios se guardan en tu navegador y se
+      reflejan de inmediato en el listado y en la portada.
+    </p>
+    <hr class="pd-regla mt-4">
+  </div>
+</section>
+
+<!-- ===== Formulario y vista previa ===== -->
+<section class="pt-4">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+
+      <div class="col-12 col-lg-8">
+        <form class="pd-form" (ngSubmit)="publicar()" #f="ngForm" novalidate>
+          <h2 class="h4 mb-4">Nueva noticia</h2>
+
+          <div class="mb-3">
+            <label class="form-label" for="titulo">Título *</label>
+            <!-- Enlace en dos sentidos: el campo y la propiedad del componente -->
+            <input type="text" class="form-control" id="titulo" name="titulo"
+                   maxlength="120" [(ngModel)]="titulo"
+                   [class.is-invalid]="intentado() && error('titulo')"
+                   placeholder="Un titular claro, de 10 a 120 caracteres">
+            @if (intentado() && error('titulo')) {
+              <div class="invalid-feedback d-block">{{ error('titulo') }}</div>
+            }
+            <div class="d-flex justify-content-between">
+              <span class="form-text">Entre 10 y 120 caracteres.</span>
+              <span class="pd-contador">{{ titulo.length }} / 120</span>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label" for="categoria">Categoría *</label>
+              <select class="form-select" id="categoria" name="categoria" [(ngModel)]="categoria"
+                      [class.is-invalid]="intentado() && error('categoria')">
+                <option value="">Elige una categoría</option>
+                @for (c of categorias; track c) {
+                  <option [value]="c">{{ c }}</option>
+                }
+              </select>
+              @if (intentado() && error('categoria')) {
+                <div class="invalid-feedback d-block">{{ error('categoria') }}</div>
+              }
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label" for="autor">Autor *</label>
+              <input type="text" class="form-control" id="autor" name="autor" [(ngModel)]="autor"
+                     [class.is-invalid]="intentado() && error('autor')"
+                     placeholder="Nombre de quien firma">
+              @if (intentado() && error('autor')) {
+                <div class="invalid-feedback d-block">{{ error('autor') }}</div>
+              }
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <label class="form-label" for="resumen">Descripción breve *</label>
+            <textarea class="form-control" id="resumen" name="resumen" rows="2" maxlength="160"
+                      style="min-height:78px" [(ngModel)]="resumen"
+                      [class.is-invalid]="intentado() && error('resumen')"
+                      placeholder="El texto que aparece en la tarjeta"></textarea>
+            @if (intentado() && error('resumen')) {
+              <div class="invalid-feedback d-block">{{ error('resumen') }}</div>
+            }
+            <div class="d-flex justify-content-between">
+              <span class="form-text">Es el texto que aparece en la tarjeta.</span>
+              <span class="pd-contador">{{ resumen.length }} / 160</span>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <label class="form-label" for="contenido">Contenido completo *</label>
+            <textarea class="form-control" id="contenido" name="contenido" rows="6"
+                      style="min-height:150px" [(ngModel)]="contenido"
+                      [class.is-invalid]="intentado() && error('contenido')"
+                      placeholder="Escribe aquí el cuerpo de la noticia. Separa los párrafos con una línea en blanco."></textarea>
+            @if (intentado() && error('contenido')) {
+              <div class="invalid-feedback d-block">{{ error('contenido') }}</div>
+            }
+            <div class="d-flex justify-content-between">
+              <span class="form-text">Mínimo 200 caracteres. Se muestra en la vista de detalle.</span>
+              <span class="pd-contador">{{ contenido.length }} caracteres</span>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <label class="form-label" for="imagen">Ruta o dirección de la imagen</label>
+            <input type="text" class="form-control" id="imagen" name="imagen" [(ngModel)]="imagen"
+                   [class.is-invalid]="intentado() && error('imagen')"
+                   placeholder="assets/img/noticias/mi-imagen.jpg">
+            @if (intentado() && error('imagen')) {
+              <div class="invalid-feedback d-block">{{ error('imagen') }}</div>
+            }
+            <span class="form-text">
+              Opcional. Si la dejas vacía, la noticia usará un marcador de imagen.
+            </span>
+          </div>
+
+          <div class="form-check mt-4">
+            <input class="form-check-input" type="checkbox" id="destacada" name="destacada"
+                   [(ngModel)]="destacada">
+            <label class="form-check-label" for="destacada" style="font-size:0.90625rem">
+              Mostrar esta noticia como destacada en la portada
+            </label>
+          </div>
+
+          <div class="d-flex align-items-center gap-3 flex-wrap border-top mt-4 pt-4">
+            <button type="submit" class="btn btn-primary">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M12 5v14" /><path d="M5 12h14" />
+              </svg>
+              Publicar noticia
+            </button>
+            <button type="button" class="btn btn-ghost" (click)="limpiar()">Descartar</button>
+            <span class="pd-meta ms-auto">* Campos obligatorios</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <span class="pd-kicker">Vista previa en vivo</span>
+          <hr class="pd-regla flex-grow-1">
+        </div>
+        <!-- Se repinta sola: depende de las mismas propiedades que el formulario -->
+        <app-noticia-card [noticia]="borrador" [favorito]="false" />
+        <p class="form-text mt-3">
+          Así se verá la tarjeta en la portada y en el listado. Se actualiza mientras escribes.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tabla de gestión ===== -->
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="pd-seccion-cab d-flex align-items-end justify-content-between flex-wrap gap-2">
+      <div>
+        <span class="pd-kicker">Administrar</span>
+        <h2 class="mt-2">Noticias publicadas</h2>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" [disabled]="hayOcultas === 0"
+              (click)="restaurar()">Restaurar noticias base</button>
+    </div>
+
+    <!-- Confirmación antes de eliminar -->
+    @if (porBorrar(); as n) {
+      <div class="pd-panel mb-4" style="border-color:var(--pd-accent)">
+        <div class="d-flex gap-3 align-items-start">
+          <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0"
+                style="width:44px;height:44px;background:var(--pd-accent-soft);border-radius:999px;color:var(--pd-accent)">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 4.5l8.5 15h-17z" /><path d="M12 10v4" /><path d="M12 17.2v.2" />
+            </svg>
+          </span>
+          <div class="flex-grow-1">
+            <h2 class="h5 mb-2">¿Eliminar esta noticia?</h2>
+            <p class="pd-card__resumen mb-2">
+              Se quitará del listado, de la portada y de tu lista de favoritos.
+            </p>
+            <p class="mb-3" style="font-size:0.90625rem;font-weight:500;background:#F6F3EE;
+                                   border-left:3px solid var(--pd-border);padding:10px 14px">
+              «{{ n.titulo }}»
+            </p>
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-primary btn-sm" (click)="eliminar()">Sí, eliminar</button>
+              <button type="button" class="btn btn-ghost btn-sm"
+                      (click)="porBorrar.set(undefined)">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    <div class="pd-tabla-scroll" style="border:1px solid var(--pd-border);border-radius:3px;overflow:hidden">
+      <table class="pd-tabla">
+        <caption class="visually-hidden">Noticias visibles, con su origen y la acción de eliminar</caption>
+        <thead>
+          <tr>
+            <th scope="col" style="width:86px">Imagen</th>
+            <th scope="col">Título</th>
+            <th scope="col" style="width:180px">Categoría</th>
+            <th scope="col" style="width:120px">Fecha</th>
+            <th scope="col" style="width:110px">Origen</th>
+            <th scope="col" style="width:120px;text-align:right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (n of catalogo(); track n.id) {
+            <tr>
+              <td>
+                @if (n.imagen) {
+                  <img class="pd-tabla__miniatura" [src]="n.imagen" alt="">
+                } @else {
+                  <div class="pd-marcador pd-tabla__miniatura"></div>
+                }
+              </td>
+              <td style="font-weight:500">{{ n.titulo }}</td>
+              <td>{{ n.categoria }}</td>
+              <td style="font-size:12.5px;color:var(--pd-muted)">{{ n.fecha | fechaEs }}</td>
+              <td>
+                <span class="pd-origen" [class.pd-origen--nueva]="esCreada(n)">
+                  {{ esCreada(n) ? 'Creada' : 'Base' }}
+                </span>
+              </td>
+              <td style="text-align:right">
+                <button type="button" class="pd-iconbtn"
+                        [attr.aria-label]="'Eliminar ' + n.titulo" title="Eliminar"
+                        (click)="confirmarBorrado(n)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 7h16" /><path d="M9.5 7V5h5v2" /><path d="M6.5 7l1 12.5h9L17.5 7" />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="form-text mt-3">
+      Se muestran {{ catalogo().length }} noticias visibles.
+      @if (hayOcultas) {
+        Hay {{ hayOcultas }}
+        {{ hayOcultas === 1 ? 'noticia del archivo base oculta' : 'noticias del archivo base ocultas' }};
+        «Restaurar noticias base» las recupera.
+      } @else {
+        Las marcadas como «Base» provienen del archivo JSON y pueden recuperarse tras eliminarlas.
+      }
+    </p>
+  </div>
+</section>
+
+@if (aviso()) {
+  <div class="pd-toast visible" role="status" aria-live="polite">{{ aviso() }}</div>
+}

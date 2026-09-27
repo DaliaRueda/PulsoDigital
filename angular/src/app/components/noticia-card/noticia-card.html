@@ -1,0 +1,46 @@
+<article class="pd-card">
+
+  <!-- Property binding: la ruta y el texto alternativo salen del dato -->
+  @if (noticia.imagen) {
+    <img class="pd-card__img"
+         [src]="noticia.imagen"
+         [alt]="noticia.titulo"
+         loading="lazy"
+         (error)="imagenRota($event)">
+  } @else {
+    <div class="pd-marcador pd-card__img" style="aspect-ratio:16/9"><span>Sin imagen</span></div>
+  }
+
+  <div class="pd-card__cuerpo">
+    <!-- Interpolación -->
+    <span class="pd-badge">{{ noticia.categoria }}</span>
+
+    <h3 class="pd-card__titulo">
+      <a [routerLink]="['/noticias', noticia.id]">{{ noticia.titulo }}</a>
+    </h3>
+
+    <p class="pd-card__resumen">{{ noticia.resumen }}</p>
+  </div>
+
+  <div class="pd-card__pie">
+    <span class="pd-meta">{{ noticia.fecha | fechaEs: 'tarjeta' }} · {{ noticia.tiempoLectura }} min</span>
+
+    <div class="d-flex align-items-center gap-2">
+      <!-- Event binding: al pulsar, la tarjeta emite y el padre decide -->
+      <button type="button"
+              class="pd-iconbtn"
+              [attr.aria-pressed]="favorito"
+              [title]="favorito ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+              [attr.aria-label]="favorito ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+              (click)="alternarFavorito()">
+        <svg width="17" height="17" viewBox="0 0 24 24" [attr.fill]="favorito ? 'currentColor' : 'none'"
+             stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 20.2S4.6 15.5 4.6 10.4A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 7.4 3.4c0 5.1-7.4 9.8-7.4 9.8z" />
+        </svg>
+      </button>
+
+      <a [routerLink]="['/noticias', noticia.id]" class="pd-mas">Ver más →</a>
+    </div>
+  </div>
+
+</article>

@@ -1,0 +1,4 @@
+/* Los estilos del aplicativo viven en public/assets/css/styles.css, que se
+   carga desde index.html junto con Bootstrap. Se mantiene ahí, y no aquí,
+   para que las rutas relativas de las tipografías (../fonts/) sigan siendo
+   las mismas que en la versión de la Entrega 2 y ambas compartan archivo. */

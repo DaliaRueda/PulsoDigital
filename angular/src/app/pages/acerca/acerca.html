@@ -1,0 +1,112 @@
+<section class="pt-5">
+  <div class="container">
+    <span class="pd-kicker">Quiénes somos</span>
+    <h1 class="mt-2">Acerca de Pulso Digital</h1>
+    <p class="pd-hero__entrada mt-3" style="max-width:700px">
+      Un medio digital dedicado a la tecnología y la innovación, escrito para lectores que
+      quieren entender lo que pasa sin necesidad de ser ingenieros.
+    </p>
+    <hr class="pd-regla mt-4">
+  </div>
+</section>
+
+<!-- ===== Línea editorial ===== -->
+<section class="pt-4">
+  <div class="container pd-contenedor-ancho">
+    <div class="row g-5">
+      <div class="col-12 col-lg-7">
+        <div class="pd-prosa" style="max-width:none">
+          <h2 class="mb-3">Nuestra línea editorial</h2>
+          <p>
+            Publicamos reportajes, análisis y noticias sobre inteligencia artificial, startups,
+            software, hardware, ciberseguridad e innovación, con una mirada puesta en lo que
+            ocurre en Colombia y en la región.
+          </p>
+          <p>
+            Nos interesa menos el anuncio y más la consecuencia. Cuando una tecnología cambia la
+            forma de trabajar de alguien, esa es la noticia; el lanzamiento, por sí solo, rara vez
+            lo es.
+          </p>
+          <p>
+            Ninguna nota se publica con una sola fuente, y cuando un dato no se puede verificar lo
+            decimos en el texto en lugar de omitirlo. Si cometemos un error, lo corregimos de
+            forma visible.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-5">
+        <div class="pd-panel">
+          <span class="pd-kicker">La redacción</span>
+          <ul class="pd-ficha pt-2">
+            @for (r of redaccion; track r.nombre) {
+              <li><span class="clave">{{ r.nombre }}</span><span class="valor">{{ r.area }}</span></li>
+            }
+          </ul>
+          <p class="form-text mt-3 mb-0">
+            Equipo de ejemplo: este aplicativo es un proyecto académico y los nombres son
+            ficticios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tecnologías ===== -->
+<section class="py-5">
+  <div class="container">
+    <div class="pd-seccion-cab">
+      <span class="pd-kicker">Bajo el capó</span>
+      <h2 class="mt-2">Con qué está construido</h2>
+    </div>
+
+    <div class="row g-4">
+      @for (t of tecnologias; track t.titulo) {
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="pd-info">
+            <h3>{{ t.titulo }}</h3>
+            <p class="pd-card__resumen mt-2">{{ t.texto }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===== Preguntas frecuentes ===== -->
+<section class="pb-5">
+  <div class="container">
+    <div class="pd-seccion-cab">
+      <span class="pd-kicker">Dudas habituales</span>
+      <h2 class="mt-2">Preguntas frecuentes</h2>
+    </div>
+
+    <div class="d-flex flex-column gap-2">
+      @for (f of preguntas; track f.p; let i = $index) {
+        <div class="pd-panel" style="padding:0">
+          <h3 style="margin:0">
+            <button type="button"
+                    class="w-100 d-flex align-items-center justify-content-between gap-3"
+                    style="background:transparent;border:0;padding:18px 24px;text-align:left;
+                           font-family:var(--pd-titulares);font-size:1.0625rem;color:var(--pd-ink)"
+                    [attr.aria-expanded]="abierta === i"
+                    (click)="alternar(i)">
+              {{ f.p }}
+              <span aria-hidden="true" style="color:var(--pd-accent);font-size:1.25rem">
+                {{ abierta === i ? '−' : '+' }}
+              </span>
+            </button>
+          </h3>
+          @if (abierta === i) {
+            <p class="pd-card__resumen" style="padding:0 24px 20px;margin:0">{{ f.r }}</p>
+          }
+        </div>
+      }
+    </div>
+
+    <p class="form-text mt-4">
+      ¿Te queda alguna duda? <a routerLink="/contacto" style="text-decoration:underline">Escríbenos</a>.
+    </p>
+  </div>
+</section>

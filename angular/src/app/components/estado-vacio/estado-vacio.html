@@ -1,0 +1,7 @@
+<div class="pd-vacio">
+  <h3>{{ titulo }}</h3>
+  <p>{{ texto }}</p>
+  @if (botonTexto && botonRuta) {
+    <a [routerLink]="botonRuta" class="btn btn-primary btn-sm mt-2">{{ botonTexto }}</a>
+  }
+</div>
