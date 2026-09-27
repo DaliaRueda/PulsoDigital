@@ -6,7 +6,7 @@ Proyecto del módulo **Desarrollo de Front-end** — Agosto 2026.
 | | |
 |---|---|
 | **Repositorio** | https://github.com/DaliaRueda/PulsoDigital |
-| **Despliegue** | `[PENDIENTE — Entrega 3]` |
+| **Despliegue** | https://daliarueda.github.io/PulsoDigital/ |
 | **Video explicativo** | `[PENDIENTE — Entrega 3]` |
 | **Tutor** | John Olarte |
 | **Estudiante** | Dalia Johanna Rueda Tangarife |
@@ -36,7 +36,40 @@ Proyecto del módulo **Desarrollo de Front-end** — Agosto 2026.
 
 ## Tecnologías
 
-HTML5 · CSS3 · JavaScript (ES Modules) · Bootstrap 5.3 · Angular · localStorage · JSON local
+**Entrega 2** — HTML5 · CSS3 · JavaScript con espacio de nombres · Bootstrap 5.3 · localStorage · JSON local
+**Entrega 3** — Angular 21 con componentes independientes, enrutador con carga diferida y señales
+
+## Estructura
+
+| Carpeta | Qué contiene |
+|---|---|
+| `src/` | Aplicación de la Entrega 2 en HTML, CSS y JavaScript. Se conserva como evidencia |
+| `angular/` | Aplicación de la Entrega 3 en Angular 21. Es la que se despliega |
+| `docs/` | Documentación e informes de cada entrega |
+
+## Cómo ejecutar la aplicación de Angular
+
+```bash
+cd angular
+npm install
+npm start                 # servidor de desarrollo en http://localhost:4200
+```
+
+Para reproducir la compilación que se publica:
+
+```bash
+npm run build:pages       # compila con la ruta base de GitHub Pages
+npm run serve:dist        # la sirve en http://127.0.0.1:8080 con reenvío a index.html
+```
+
+El reenvío importa: una aplicación de una sola página necesita que el servidor devuelva
+`index.html` para cualquier ruta que no sea un archivo. GitHub Pages no lo hace, y por eso la
+compilación publica una copia de `index.html` como `404.html`.
+
+## Despliegue
+
+Automático con GitHub Actions en cada envío a `main`. El flujo está en
+`.github/workflows/deploy.yml`.
 
 ## Cómo ejecutar (Entrega 2)
 
