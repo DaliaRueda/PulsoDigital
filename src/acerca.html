@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acerca de — Pulso Digital</title>
+  <meta name="description" content="Qué es Pulso Digital, cómo trabaja su redacción y con qué tecnologías está construido el aplicativo.">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <a class="pd-saltar" href="#contenido">Saltar al contenido</a>
+
+  <header id="pd-cabecera"></header>
+
+  <main id="contenido">
+
+    <section class="pt-5">
+      <div class="container">
+        <span class="pd-kicker">Quiénes somos</span>
+        <h1 class="mt-2">Acerca de Pulso Digital</h1>
+        <p class="pd-hero__entrada mt-3" style="max-width:700px">
+          Un medio digital dedicado a la tecnología y la innovación, escrito para lectores que
+          quieren entender lo que pasa sin necesidad de ser ingenieros.
+        </p>
+        <hr class="pd-regla mt-4">
+      </div>
+    </section>
+
+    <!-- ===== Línea editorial ===== -->
+    <section class="pt-4">
+      <div class="container pd-contenedor-ancho">
+        <div class="row g-5">
+          <div class="col-12 col-lg-7">
+            <div class="pd-prosa" style="max-width:none">
+              <h2 class="mb-3">Nuestra línea editorial</h2>
+              <p>
+                Publicamos reportajes, análisis y noticias sobre inteligencia artificial,
+                startups, software, hardware, ciberseguridad e innovación, con una mirada puesta
+                en lo que ocurre en Colombia y en la región.
+              </p>
+              <p>
+                Nos interesa menos el anuncio y más la consecuencia. Cuando una tecnología cambia
+                la forma de trabajar de alguien, esa es la noticia; el lanzamiento, por sí solo,
+                rara vez lo es.
+              </p>
+              <p>
+                Ninguna nota se publica con una sola fuente, y cuando un dato no se puede
+                verificar lo decimos en el texto en lugar de omitirlo. Si cometemos un error, lo
+                corregimos de forma visible.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-5">
+            <div class="pd-panel">
+              <span class="pd-kicker">La redacción</span>
+              <ul class="pd-ficha pt-2">
+                <li><span class="clave">Ana Rivera</span><span class="valor">Inteligencia artificial</span></li>
+                <li><span class="clave">Daniel Osorio</span><span class="valor">Startups y negocio</span></li>
+                <li><span class="clave">Sofía Cárdenas</span><span class="valor">Ciberseguridad</span></li>
+                <li><span class="clave">Marcela Peña</span><span class="valor">Software y hardware</span></li>
+                <li><span class="clave">Camilo Arboleda</span><span class="valor">Reportajes</span></li>
+                <li><span class="clave">Lucía Ferrer</span><span class="valor">Innovación y ciencia</span></li>
+              </ul>
+              <p class="form-text mt-3 mb-0">
+                Equipo de ejemplo: este aplicativo es un proyecto académico y los nombres son
+                ficticios.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tecnologías ===== -->
+    <section class="py-5">
+      <div class="container">
+        <div class="pd-seccion-cab">
+          <span class="pd-kicker">Bajo el capó</span>
+          <h2 class="mt-2">Con qué está construido</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="pd-info">
+              <h3>HTML y CSS</h3>
+              <p class="pd-card__resumen mt-2">
+                Marcado semántico y una hoja de estilos propia con variables de diseño, montada
+                sobre Bootstrap 5.3 para la rejilla, el menú y las ventanas modales.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="pd-info">
+              <h3>JavaScript</h3>
+              <p class="pd-card__resumen mt-2">
+                Sin framework y sin compilación. El código se reparte en módulos por
+                responsabilidad bajo un único espacio de nombres.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="pd-info">
+              <h3>JSON local</h3>
+              <p class="pd-card__resumen mt-2">
+                El catálogo vive en un archivo JSON. Ninguna tarjeta está escrita a mano: todas se
+                generan a partir de esos datos.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="pd-info">
+              <h3>localStorage</h3>
+              <p class="pd-card__resumen mt-2">
+                Los favoritos y las noticias que creas se guardan en tu navegador. No hay cuentas,
+                no hay servidor y no se envía nada a ninguna parte.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Preguntas frecuentes ===== -->
+    <section class="pb-5">
+      <div class="container">
+        <div class="pd-seccion-cab">
+          <span class="pd-kicker">Dudas habituales</span>
+          <h2 class="mt-2">Preguntas frecuentes</h2>
+        </div>
+
+        <div class="accordion" id="pd-faq">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                ¿Necesito una cuenta para guardar favoritos?
+              </button>
+            </h3>
+            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#pd-faq">
+              <div class="accordion-body pd-card__resumen">
+                No. Tu lista se guarda en el propio navegador con <code>localStorage</code>. Eso
+                significa que es privada, pero también que vive solo en ese dispositivo: si entras
+                desde otro equipo, la lista aparecerá vacía.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                Eliminé una noticia por error, ¿puedo recuperarla?
+              </button>
+            </h3>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#pd-faq">
+              <div class="accordion-body pd-card__resumen">
+                Si venía del archivo base, sí: en la vista de gestión, el botón «Restaurar
+                noticias base» las devuelve todas. Las noticias que creaste tú se borran de forma
+                definitiva.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                ¿Qué pasa con el mensaje que envío por el formulario?
+              </button>
+            </h3>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#pd-faq">
+              <div class="accordion-body pd-card__resumen">
+                Este prototipo no tiene servidor, así que el mensaje queda registrado en tu propio
+                navegador y no se envía a ninguna parte. La confirmación describe exactamente lo
+                que ocurre.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pd-footer" id="pd-pie"></footer>
+
+  <script src="assets/data/noticias-respaldo.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/acerca.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

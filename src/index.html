@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulso Digital — Noticias de tecnología e innovación</title>
+  <meta name="description" content="Reportajes, análisis y noticias verificadas sobre inteligencia artificial, startups, software, hardware, ciberseguridad e innovación.">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <a class="pd-saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- Cabecera, buscador y navegación: los monta ui.js -->
+  <header id="pd-cabecera"></header>
+
+  <main id="contenido">
+
+    <!-- ===== Bienvenida y noticia de portada ===== -->
+    <section class="pd-hero">
+      <div class="container pd-contenedor-ancho">
+        <div class="row g-5 align-items-start">
+
+          <div class="col-12 col-lg-5">
+            <span class="pd-kicker">Bienvenido a Pulso Digital</span>
+            <h1 class="pd-hero__titular mt-3">Tecnología contada como se debe contar.</h1>
+            <p class="pd-hero__entrada mt-3">
+              Reportajes, análisis y noticias verificadas sobre inteligencia artificial, startups,
+              software, hardware, ciberseguridad e innovación. Guarda lo que te interesa y vuelve
+              a leerlo cuando quieras.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-4">
+              <a href="noticias.html" class="btn btn-primary">
+                Explorar noticias
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
+              </a>
+              <a href="contacto.html" class="btn btn-ghost">Contactar a la redacción</a>
+            </div>
+            <p class="pd-meta mt-3">Portada actualizada de lunes a viernes.</p>
+          </div>
+
+          <div class="col-12 col-lg-7">
+            <!-- La rellena home.js con la primera noticia destacada -->
+            <div id="pd-portada" aria-busy="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Noticias destacadas ===== -->
+    <section class="pb-5">
+      <div class="container">
+        <div class="pd-seccion-cab d-flex align-items-end justify-content-between flex-wrap gap-2">
+          <div>
+            <span class="pd-kicker">Selección de la redacción</span>
+            <h2 class="mt-2">Noticias destacadas</h2>
+          </div>
+          <a href="noticias.html" class="pd-mas">Ver todas las noticias →</a>
+        </div>
+
+        <!-- Las rellena home.js -->
+        <div class="row g-4" id="pd-destacadas" aria-busy="true"></div>
+      </div>
+    </section>
+
+    <!-- ===== Llamado a la acción ===== -->
+    <section class="pd-cta">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-12 col-lg-8">
+            <span class="pd-kicker">Tu lista personal</span>
+            <h2 class="mt-2" style="font-size:clamp(1.75rem,1.2rem+2vw,2.375rem)">
+              Guarda una noticia hoy y encuéntrala cuando la necesites
+            </h2>
+            <p class="mt-3 mb-0" style="font-size:1.03125rem">
+              Sin registro y sin contraseñas: tus favoritos se guardan en tu propio navegador.
+            </p>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="d-flex flex-column gap-2">
+              <a href="favoritos.html" class="btn btn-primary">Ver mis favoritos</a>
+              <a href="noticias.html" class="btn btn-outline-claro">Explorar el archivo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Sección informativa ===== -->
+    <section class="py-5">
+      <div class="container">
+        <div class="pd-seccion-cab">
+          <span class="pd-kicker">Cómo trabajamos</span>
+          <h2 class="mt-2">Tres compromisos con quien nos lee</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-md-4">
+            <div class="pd-info">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D6303C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.4c0 4.6-3.1 8.3-7.5 9.6-4.4-1.3-7.5-5-7.5-9.6V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+              <h3 class="mt-3">Dos fuentes, siempre</h3>
+              <p class="pd-card__resumen mt-2">
+                Ninguna nota se publica con una sola fuente. Si algo no se puede verificar,
+                lo decimos en el texto.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="pd-info">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D6303C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h13"/></svg>
+              <h3 class="mt-3">Titulares sin anzuelo</h3>
+              <p class="pd-card__resumen mt-2">
+                El titular dice lo que pasó. El tiempo de lectura aparece antes de que decidas
+                entrar.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="pd-info">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D6303C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v7l3-2 3 2V4"/></svg>
+              <h3 class="mt-3">Tu lista es tuya</h3>
+              <p class="pd-card__resumen mt-2">
+                Los favoritos viven en tu navegador. No pedimos correo, no creamos perfil,
+                no compartimos nada.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pie de página: lo monta ui.js -->
+  <footer class="pd-footer" id="pd-pie"></footer>
+
+  <!-- Orden de carga: respaldo de datos → persistencia → datos → interfaz → vista -->
+  <script src="assets/data/noticias-respaldo.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/home.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
