@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.angular/
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+docs/entrega-1/canvas/build/
+docs/entrega-1/canvas/render/
+docs/entrega-1/canvas/.measure/
