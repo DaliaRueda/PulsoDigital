@@ -22,7 +22,7 @@ Virtual / Front End
 
 Tutor: John Olarte
 
-4 de octubre de 2026
+10 de octubre de 2026
 
 ---
 
