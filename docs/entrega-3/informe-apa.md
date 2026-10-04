@@ -1,7 +1,7 @@
 # Informe — Entrega 3: Entrega final
 
 > **Cómo usar este borrador.** Se convierte a Word con:
-> `python ../hacer-docx.py informe-apa.md "Entrega-3-Entrega-Final-Pulso-Digital.docx" "Pulso Digital: aplicativo web de noticias desarrollado en Angular"`
+> `python ../hacer-docx.py informe-apa.md "Entrega-3-Entrega-Final-Pulso-Digital.docx" "Pulso Digital: aplicativo web de noticias desarrollado en Angular" "10 de octubre de 2026"`
 > Después hay que actualizar el índice desde Word y ejecutar `metadatos.py`.
 
 ---
