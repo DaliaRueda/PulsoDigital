@@ -9,3 +9,16 @@ Thumbs.db
 docs/entrega-1/canvas/build/
 docs/entrega-1/canvas/render/
 docs/entrega-1/canvas/.measure/
+
+# Material de trabajo interno (se conserva en local, no forma parte de la entrega)
+PLAN.md
+Orientaciones*.pdf
+docs/hacer-docx.py
+docs/metadatos.py
+docs/recursos/
+docs/entrega-1/canvas/
+docs/entrega-*/*.py
+docs/entrega-*/informe-apa.md
+docs/entrega-3/guion-video.md
+docs/entrega-*/*.pdf
+docs/entrega-*/*.txt
