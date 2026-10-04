@@ -77,7 +77,7 @@ Virtual / Front End
 
 Tutor: John Olarte
 
-[Día] de [mes] de 2026
+4 de octubre de 2026
 
 ---
 
@@ -727,20 +727,21 @@ desarrollo. La Tabla 9 recoge el resultado.
 
 El repositorio es público y contiene las tres entregas. La carpeta `src/` guarda el prototipo en
 JavaScript de la Entrega 2; `angular/` contiene el aplicativo de esta entrega; `docs/` reúne la
-maquetación, las capturas y los informes de las tres. El historial tiene siete envíos, uno por hito,
-con mensajes que describen el cambio.
+maquetación, las capturas y los informes de las tres. El historial tiene un envío por hito, con mensajes
+que describen el cambio.
 
 ## 9.2 Vídeo explicativo
 
-El vídeo de presentación, de duración inferior a tres minutos, recorre el aplicativo desplegado:
-muestra la portada, el filtrado del listado, la lectura de una noticia, el guardado en favoritos con
-el contador de la cabecera actualizándose, la creación de una noticia con su vista previa en vivo y
-el formulario de contacto, y termina explicando la arquitectura de componentes y el despliegue
-automático.
+El vídeo de presentación, de duración inferior a tres minutos, recorre el aplicativo desplegado en
+GitHub Pages: la portada, el listado de noticias, la lectura de una noticia, el formulario para
+publicar, la página de favoritos y el formulario de contacto. Termina en el editor, con el componente
+de la tarjeta de noticia, para explicar cómo se arma la interfaz con componentes reutilizables, cómo
+la tarjeta recibe los datos y avisa a la página al marcar un favorito, y cómo el despliegue se
+actualiza automáticamente con cada cambio enviado a GitHub.
 
 Dirección del vídeo:
 
-**[PEGAR AQUÍ EL ENLACE DE YOUTUBE ANTES DE GENERAR EL PDF]**
+**https://youtu.be/7ltYDqaxYc0**
 
 ---
 
